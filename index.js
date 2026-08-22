@@ -1,26 +1,14 @@
 
+const http = require('http')
 
-let arr = [1, 2, 3, 4]
-
-let z = 0;
-
-
-function my(arr){
-
-     for (let i = arr.length - 1; i > z; i--) {
-            let temp = arr[i]
-            arr[i] = arr[z]
-            console.log(arr[i])
-            arr[z] = temp;
-            z++
-
-
-        }
-        console.log(arr)
-
+const server = http.createServer((req, res) => {
+    console.log(req)
 }
+);
 
-my(arr)
+const PORT = 3000
 
 
-
+server.listen(PORT, () => {
+    console.log(`server is running http://localhost:${PORT}`)
+})
