@@ -10,17 +10,16 @@ const server = http.createServer((req, res) => {
        res.write('<html>')
        res.write('<title>hello</title>')
        res.write('<body><h1>Enter your details</h1>')
-       res.write('<form>')
-       res.write('<input type="text" name="username placeholder="Enter Name""><br>')
 
-       res.write('<label for="gender">Gender</label>')
+       res.write('<form action="/submit-details method="POST"">')
+       res.write('<input type="text" name="username" placeholder="Enter Name""><br>')
 
-       res.write('<input type="radio" id="male" value="male">')
+       res.write('<input type="radio" name="gender" id="male" value="male">')
        res.write('<label for="male">Male</label>')
 
-       res.write('<input type="radio" id="female" value="female">')
+       res.write('<input type="radio" name="gender" id="female" value="female">')
        res.write('<label for="female">Female</label>')
-       
+
        res.write('<button type="submit">Submit</button>')
        res.write('</form>')
         res.write('</body>')
@@ -32,7 +31,6 @@ const server = http.createServer((req, res) => {
        res.write('<body>Others page</body>')
        res.write('</html>')
        res.end()
-
 
 }
 );
