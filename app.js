@@ -34,6 +34,7 @@ res.write('<input type="text" name="username" placeholder="Enter Name"><br>')
     fs.writeFileSync('max.txt', 'complate')
     res.statusCode = 302;
     res.setHeader('Location', '/')
+    return res.end();
    }   
 
 
@@ -52,3 +53,4 @@ const PORT = 3001
 server.listen(PORT, () => {
     console.log(`server is running http://localhost:${PORT}`)
 })
+
