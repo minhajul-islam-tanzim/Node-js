@@ -40,18 +40,13 @@ res.write('<input type="text" name="username" placeholder="Enter Name"><br>')
             })
 
         req.on('end', () => {
-            // const fullBody = Buffer.concat(body).toString();
             const fullBody = Buffer.concat(body).toString()
             console.log(fullBody);
 
             const params = new URLSearchParams(fullBody);
             console.log(params);
 
-            //     const bodyObj = {}
-            // for(const [key, value] of params.entries()){
-            //     bodyObj[key] = value
-            // }
-
+            
             const bodyObj = {};
             for(const [key, value] of params.entries()){
                     bodyObj[key] = value;
