@@ -1,3 +1,5 @@
+const { sumReqHandler } = require("./sum");
+
 const calculatorHandeler = (req, res) => {
   console.log(req.method, req.url);
   res.setHeader("content-type", "text/html");
@@ -11,10 +13,9 @@ const calculatorHandeler = (req, res) => {
       </body>
       </html>
       `);
-      return res.end()
-
-  }else if(req.url.toLowerCase() === "/calculator"){
-        res.write(`
+    return res.end();
+  } else if (req.url.toLowerCase() === "/calculator") {
+    res.write(`
       <html>
       <title> enter</title>
       <body><h1>Enter your number</h1>
@@ -25,22 +26,17 @@ const calculatorHandeler = (req, res) => {
             <input type ="submit" value="Sum"> 
 
           </form>
-
-
-
-
       <a href="/calculator">Go to Calculator</a>
       </body>
       </html>
       `);
-      return res.end()
-
-
-
+    return res.end();
+  } else if(req.url.toLowerCase() === '/calculate' && req.method === "POST"){
+          return sumReqHandler(req, res);
   }
 
 
-    res.write(`
+  res.write(`
       <html>
       <title> 404 </title>
       <body><h1> 404 page is not found </h1>
@@ -48,7 +44,7 @@ const calculatorHandeler = (req, res) => {
       </body>
       </html>
       `);
-      return res.end()
+  return res.end();
 };
 
 exports.calculatorHandeler = calculatorHandeler;
