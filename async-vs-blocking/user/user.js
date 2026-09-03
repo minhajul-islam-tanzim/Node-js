@@ -1,3 +1,5 @@
+const fs = require("fs")
+
 const serverHandle = (req, res) => {
   console.log(req.method, req.url);
   res.setHeader("content-type", "text/html");
@@ -38,18 +40,31 @@ const serverHandle = (req, res) => {
       console.log(params);
 
       const bodyObj = {};
-
       for (const [key, value] of params.entries()) {
         bodyObj[key] = value;
       }
 
-      console.log();
+      fs.writeFile('users.txt', JSON.stringify(bodyObj),(err) => {
+        if(err){
+          console.log(err)
+
+        }
+
+      } )
+
+      res.statusCode = 302;
+      res.setHeader("Location", "/");
+      return res.end();
+
     });
-    res.statusCode = 302;
-    res.setHeader("Location", "/");
-    return res.end();
+  }else{
+      res.write("<html>");
+    res.write("<title>Error</title>");
+    res.write("<body><h1>Try again</h1>");
+    res.write("</body>");
+    res.write("</html>");
+    return res.end()
   }
 };
-
 
 module.exports = serverHandle;
