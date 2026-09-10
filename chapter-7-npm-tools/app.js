@@ -1,8 +1,7 @@
 const http = require("http");
 const serverHandle = require("./user")
 
-const server = http.createServer(serverHandle);
-
+const server = http.createServer(serverHandle)
 
 const PORT = 3002;
 server.listen(PORT, () => {
