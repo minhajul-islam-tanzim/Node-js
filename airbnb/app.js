@@ -23,6 +23,13 @@ app.use(userRouter)
 app.use(hostRouter)
 
 
+// if user get in wrong path then will be error
+
+app.use((req, res, next) => {
+    res.status(404).send(`<h3>Browser is getting error</h3>`)
+
+})
+
 
 
 const PORT = 3002;
