@@ -1,10 +1,12 @@
 // external module 
 const express = require("express");
+const path = require('path')
 
 
 // local module 
 const userRouter = require("./routes/userRouter")
 const hostRouter = require("./routes/hostRouter");
+
 
 
 
@@ -20,14 +22,13 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded())
 app.use(userRouter)
-app.use(hostRouter)
+app.use("/host",hostRouter)
 
 
 // if user get in wrong path then will be error
 
 app.use((req, res, next) => {
-    res.status(404).send(`<h3>Browser is getting error</h3>`)
-
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
 })
 
 
