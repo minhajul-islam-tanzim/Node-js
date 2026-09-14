@@ -1,6 +1,7 @@
 // external module 
 const express = require("express");
 const path = require('path')
+const rootDir = require('./utils/pathUtil')
 
 
 // local module 
@@ -28,7 +29,7 @@ app.use("/host",hostRouter)
 // if user get in wrong path then will be error
 
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
+    res.status(404).sendFile(path.join(rootDir, 'views', '404.html'))
 })
 
 
