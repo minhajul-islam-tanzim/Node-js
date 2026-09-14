@@ -20,7 +20,7 @@ hostRouter.get("/add-home",(req, res, next) => {
 
 hostRouter.post("/add-home",(req, res, next) => {
     console.log("first", req.url, req.method, req.body);
-    res.send(`<h1>${req.body.houseName + " " }Register succesfully</h1>
+    res.send(`<h1>${req.body.houseName}Register succesfully</h1>
         <a href="/">Go to home</a>
         `)
 })
