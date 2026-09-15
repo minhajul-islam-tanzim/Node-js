@@ -1,0 +1,28 @@
+
+<%- include('partials/head') %>
+
+  <body>
+    <header>
+      
+      <h1 class="text-3xl bg-amber-200">
+        Here are our register Homes
+      </h1>
+
+        <ul>
+          <% registerHome.forEach(home => { %>
+                  <li>
+
+                      <%= home.houseName%>
+
+                  </li>
+        <%  }) %>
+        </ul>
+
+    </header>
+
+    <main>
+      <a href="/host/add-home" class="text-red-800"> Add home </a>
+    </main>
+
+  </body>
+</html>
