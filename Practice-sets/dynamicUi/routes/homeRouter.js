@@ -1,0 +1,13 @@
+
+const express = require("express");
+
+const {registerHome} = require('./contactRouter')
+
+const homeRouter = express.Router();
+
+homeRouter.get("/", (req, res, next) => {
+  console.log("handling /for Get ", req.url, req.method);
+  res.render('home', {registerHome: registerHome, pageTitle: 'My home'})
+});
+
+exports.homeRouter = homeRouter;

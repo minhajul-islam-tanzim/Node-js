@@ -13,12 +13,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "scripts": {
-    "start": "npm run build:css && node app.js",
-    "dev": "concurrently \"nodemon app.js\" \"npm run dev:css\"",
-    "dev:css": "tailwindcss -i ./src/import.css -o ./public/home.css --watch",
-    "build:css": "tailwindcss -i ./src/import.css -o ./public/home.css --minify"
-  },
+"scripts": {
+  "start": "npm run build:css && node app.js",
+  "dev": "concurrently \"nodemon app.js\" \"npm run dev:css\"",
+  "dev:css": "tailwindcss -i ./public/input.css -o ./public/output.css --watch",
+  "build:css": "tailwindcss -i ./public/input.css -o ./public/output.css --minify"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

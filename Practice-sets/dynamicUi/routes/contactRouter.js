@@ -14,13 +14,14 @@ contactRouter.get("/add-home",(req, res, next) => {
 
 })
 
-
-
 const registerHome = []
 
 contactRouter.post("/add-home",(req, res, next) => {
+
     registerHome.push({houseName: req.body.houseName})
+
     console.log("first", req.url, req.method, req.body);
+
     res.render("contactSuccess",{pageTitle: 'successFully Run'})
     
 })
