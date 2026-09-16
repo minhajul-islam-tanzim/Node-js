@@ -12,10 +12,10 @@ const { contactRouter } = require('./routes/contactRouter')
 
 const app = express()
 
+
+
+
 app.use(express.static('public'));
-
-
-
 
 // const homePath = path.join(rootDir, 'views', 'home.html');
 

@@ -1,36 +1,37 @@
 
 <%- include('partials/head') %>
 
-  <body>
-    <header>
-      
-      <h1 class="text-1xl bg-amber-200">
-        Here are our register Homes
-      </h1>
-
-    </header>
-
-        <ul>
-            <%
-              registerHome.forEach(home => {%>
-
-                  <li> 
-                    <%= home.houseName%>
-                  </li>
+<body class="bg-gray-50 min-h-screen">
 
 
-              <%      
+<%- include('partials/nav') %>
 
-              })
-            
-            
-            %>
 
-        </ul>
+  <header class="bg-white shadow-md py-6 mb-8">
+    <h1 class="text-3xl font-bold text-center text-gray-800">
+      Here are our register Homes
+    </h1>
+  </header>
 
-    <main>
-      <a href="/host/add-home" class="text-red-800"> Add home </a>
-    </main>
 
-  </body>
+
+
+
+
+  <main class="max-w-4xl mx-auto px-4">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <%
+        registerHome.forEach(home => {
+      %>
+        <li class="bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+          <h2 class="text-lg font-semibold text-gray-800">
+            <%= home.houseName %>
+          </h2>
+        </li>
+      <%
+        })
+      %>
+    </ul>
+  </main>
+</body>
 </html>
