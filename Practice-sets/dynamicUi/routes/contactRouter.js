@@ -10,7 +10,7 @@ const  contactRouter = express.Router()
 
 contactRouter.get("/add-home",(req, res, next) => {
     console.log("first", req.url, req.method);
-    res.render("contactUs", {pageTitle: 'Form path'})
+    res.render("contactUs", {pageTitle: 'Form path', value: 'add-home'})
 
 })
 
@@ -18,11 +18,11 @@ const registerHome = []
 
 contactRouter.post("/add-home",(req, res, next) => {
 
-    registerHome.push({houseName: req.body.houseName})
+    registerHome.push(req.body)
 
     console.log("first", req.url, req.method, req.body);
 
-    res.render("contactSuccess",{pageTitle: 'successFully Run'})
+    res.render("contactSuccess",{pageTitle: 'successFully Run', value: 'add-home'})
     
 })
 

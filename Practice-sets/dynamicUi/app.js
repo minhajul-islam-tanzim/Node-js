@@ -17,7 +17,6 @@ const app = express()
 
 app.use(express.static('public'));
 
-// const homePath = path.join(rootDir, 'views', 'home.html');
 
 app.use((req, res, next) => {
     console.log('first', req.url, req.method)
@@ -26,12 +25,12 @@ app.use((req, res, next) => {
 
 
 // for ejs use i have set ejs in engine and set path 
+
 app.set('view engine', 'ejs')
+
 app.set('views', path.join(rootDir, 'views'))
 
-
 app.use(express.urlencoded())
-
 
 app.use(homeRouter)
 
@@ -39,7 +38,7 @@ app.use("/host", contactRouter)
 
 
 app.use((req, res, next)    => {
-    res.status(404).render('404', {pageTitle: 'page not coming'})
+    res.status(404).render('404', {pageTitle: 'page not coming',value:404})
 })
 
 
