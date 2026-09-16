@@ -13,10 +13,10 @@ const app = express()
 
 
 
-// app.use((req, res, next) => {
-//     console.log("first", req.url , req.method)
-//     next()
-// })
+app.use((req, res, next) => {
+    console.log("first", req.url , req.method)
+    next()
+})
 
 app.set('view engine', 'ejs')
 app.set('views', 'views')
