@@ -1,31 +1,17 @@
 // Core module 
-const path = require('path')
+// const path = require('path')
 // external module 
 const express = require('express');
 // Local module 
-const rootDir = require('../utils/utils')
+// const rootDir = require('../utils/utils')
+const addHome = require('../controllers/addHome')
 
 const  contactRouter = express.Router()
 
 
-contactRouter.get("/add-home",(req, res, next) => {
-    console.log("first", req.url, req.method);
-    res.render("contactUs", {pageTitle: 'Form path', value: 'add-home'})
+contactRouter.get("/add-home", addHome.getAddHome)
 
-})
-
-const registerHome = []
-
-contactRouter.post("/add-home",(req, res, next) => {
-
-    registerHome.push(req.body)
-
-    console.log("first", req.url, req.method, req.body);
-
-    res.render("contactSuccess",{pageTitle: 'successFully Run', value: 'add-home'})
-    
-})
+contactRouter.post("/add-home", addHome.postAddHome)
 
 
 exports.contactRouter = contactRouter;
-exports.registerHome = registerHome;

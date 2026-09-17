@@ -1,7 +1,7 @@
 
 const express = require("express");
 
-const {registerHome} = require('./contactRouter')
+const {registerHome} = require('../controllers/addHome')
 
 const homeRouter = express.Router();
 
