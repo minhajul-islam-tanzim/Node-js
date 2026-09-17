@@ -4,7 +4,7 @@
 const express = require('express');
 // Local module 
 // const rootDir = require('../utils/utils')
-const addHome = require('../controllers/addHome')
+const addHome = require('../controllers/homeController')
 
 const  contactRouter = express.Router()
 
