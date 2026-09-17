@@ -8,6 +8,7 @@ const path = require('path')
 const rootDir = require('./utils/utils')
 const { homeRouter } = require('./routes/homeRouter')
 const { contactRouter } = require('./routes/contactRouter')
+const error = require('./controllers/error')
 
 
 const app = express()
@@ -37,9 +38,7 @@ app.use(homeRouter)
 app.use("/host", contactRouter)
 
 
-app.use((req, res, next)    => {
-    res.status(404).render('404', {pageTitle: 'page not coming',value:404})
-})
+app.use(error.error)
 
 
 
