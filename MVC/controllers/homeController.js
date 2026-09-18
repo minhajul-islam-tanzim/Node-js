@@ -1,19 +1,22 @@
+const Home = require("../models/homeDataShow");
 
 
 
 exports.getAddHome = (req, res, next) => {
-    console.log("first", req.url, req.method);
+
     res.render("contactUs", {pageTitle: 'Form path', value: 'add-home'})
 
 }
 
-const registerHome = []
+
 
 exports.postAddHome = (req, res, next) => {
 
-    registerHome.push(req.body)
+    const {houseName, price, location, rating, photoUrl} = req.body
 
-    console.log("first", req.url, req.method, req.body);
+    const home = new Home(houseName, price, location, rating, photoUrl)
+
+    home.save()
 
     res.render("contactSuccess",{pageTitle: 'successFully Run', value: 'add-home'})
     
@@ -21,8 +24,7 @@ exports.postAddHome = (req, res, next) => {
 
 
 exports.getHome = (req, res, next) => {
-  console.log("handling /for Get ", req.url, req.method);
+    const registerHome = Home.fetchAll()
   res.render('home', {registerHome: registerHome, pageTitle: 'My home', value: 'home'})
 }
 
-exports.registerHome = registerHome;
