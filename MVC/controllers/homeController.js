@@ -24,7 +24,10 @@ exports.postAddHome = (req, res, next) => {
 
 
 exports.getHome = (req, res, next) => {
-    const registerHome = Home.fetchAll()
-  res.render('home', {registerHome: registerHome, pageTitle: 'My home', value: 'home'})
+    
+Home.fetchAll( registerHome => {
+ res.render('home', {registerHome: registerHome, pageTitle: 'My home', value: 'home'})
+})
+
 }
 
