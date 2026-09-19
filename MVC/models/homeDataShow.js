@@ -2,7 +2,6 @@
 const fs = require("fs");
 const path = require("path");
 const rootDir = require("../utils/utils");
-const { error } = require("console");
 
 module.exports = class Home {
   constructor(houseName, price, location, rating, photoUrl) {
@@ -20,9 +19,9 @@ module.exports = class Home {
         registerHome.push(this)
         const homeDataPath = path.join(rootDir, "data", "homes.json")
 
-        fs.writeFile(homeDataPath, JSON.stringify(registerHome)),error  => {
+        fs.writeFile(homeDataPath, JSON.stringify(registerHome),error  => {
             console.log('file is not working', error)
-        }
+        })
 
     })
     
