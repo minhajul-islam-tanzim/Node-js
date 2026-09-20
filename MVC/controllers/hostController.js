@@ -6,11 +6,9 @@ const Home = require("../models/homeDataShow");
 
 exports.getAddHome = (req, res, next) => {
 
-    res.render("host/contactUs", {pageTitle: 'Form path', value: 'add-home'})
+    res.render("host/home-added", {pageTitle: 'Form path', value: 'add-home'})
 
 }
-
-
 
 
 
@@ -24,14 +22,5 @@ exports.postAddHome = (req, res, next) => {
 
     res.render("host/contactSuccess",{pageTitle: 'successFully Run', value: 'add-home'})
     
-}
-
-
-exports.getHome = (req, res, next) => {
-    
-Home.fetchAll( registerHome => {
- res.render('store/home-list', {registerHome: registerHome, pageTitle: 'My home', value: 'home'})
-})
-
 }
 
