@@ -9,5 +9,6 @@ hostRouter.get("/add-home", hostController.getAddHome)
 
 hostRouter.post("/add-home", hostController.postAddHome)
 
+hostRouter.get("/host-home-list", hostController.getHostHome)
 
 exports.hostRouter = hostRouter;
