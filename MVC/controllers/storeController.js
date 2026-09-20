@@ -1,22 +1,41 @@
 const Home = require("../models/homeDataShow");
 
-
-
-
-exports.getHome = (req, res, next) => {
-    
-Home.fetchAll( registerHome => {
- res.render('store/home-list', {registerHome: registerHome, pageTitle: 'My home', value: 'home'})
-})
-
-}
-
-exports.getBookings = (req, res, next) => {
+exports.getIndex = (req, res, next) => {
   Home.fetchAll((registerHome) => {
-    res.render("store/bookings", {
+    res.render("store/index", {
       registerHome: registerHome,
-      pageTitle: "My Bookings",
-      value: "bookings",
+      pageTitle: "airbnb homes",
+      value: "index",
     });
   });
+};
+
+exports.getHome = (req, res, next) => {
+  Home.fetchAll((registerHome) => {
+    res.render("store/home-list", {
+      registerHome: registerHome,
+      pageTitle: "home list",
+      value: "home-list",
+    });
+  });
+};
+
+
+exports.getBookings = (req, res, next) => {
+    Home.fetchAll((registerHome) => {
+  res.render("store/bookings", {
+      registerHome: registerHome,
+    pageTitle: "My Bookings",
+    value: "bookings",
+      })  });
+};
+
+
+exports.getFavouriteList = (req, res, next) => {
+  Home.fetchAll((registerHome) => {
+  res.render("store/favourite-list", {
+      registerHome: registerHome,
+    pageTitle: "My favourite list",
+    value: "favourite",
+  })});
 };
