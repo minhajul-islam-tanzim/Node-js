@@ -245,6 +245,9 @@
   .grid {
     display: grid;
   }
+  .hidden {
+    display: none;
+  }
   .inline-block {
     display: inline-block;
   }
@@ -259,6 +262,15 @@
   }
   .min-h-screen {
     min-height: 100vh;
+  }
+  .w-7 {
+    width: calc(var(--spacing) * 7);
+  }
+  .w-17 {
+    width: calc(var(--spacing) * 17);
+  }
+  .w-47 {
+    width: calc(var(--spacing) * 47);
   }
   .w-full {
     width: 100%;
