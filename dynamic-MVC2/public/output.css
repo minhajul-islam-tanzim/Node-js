@@ -263,12 +263,6 @@
   .min-h-screen {
     min-height: 100vh;
   }
-  .w-7 {
-    width: calc(var(--spacing) * 7);
-  }
-  .w-17 {
-    width: calc(var(--spacing) * 17);
-  }
   .w-47 {
     width: calc(var(--spacing) * 47);
   }
@@ -356,9 +350,6 @@
   }
   .bg-gray-50 {
     background-color: var(--color-gray-50);
-  }
-  .bg-gray-500 {
-    background-color: var(--color-gray-500);
   }
   .bg-green-500 {
     background-color: var(--color-green-500);

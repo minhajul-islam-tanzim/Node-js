@@ -1,3 +1,4 @@
+const Favourite = require("../models/favourite");
 const Home = require("../models/homeDataShow");
 
 exports.getIndex = (req, res, next) => {
@@ -43,8 +44,15 @@ exports.getFavouriteList = (req, res, next) => {
 
 exports.postAddToFavourite = (req, res, next) => {
   console.log("came to to add favourite",req.body)
-  res.redirect("/favourite-list")
+  Favourite.addTofavourite(req.body.id, error => {
+    if(error){
+      console.log('error is coming and destroy your app')
+    }
+    res.redirect('/favourite-list')
+  })
+
 }
+
 
 
 
