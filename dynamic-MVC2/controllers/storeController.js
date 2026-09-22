@@ -20,22 +20,41 @@ exports.getHome = (req, res, next) => {
   });
 };
 
-
 exports.getBookings = (req, res, next) => {
-    Home.fetchAll((registerHome) => {
-  res.render("store/bookings", {
+  Home.fetchAll((registerHome) => {
+    res.render("store/bookings", {
       registerHome: registerHome,
-    pageTitle: "My Bookings",
-    value: "bookings",
-      })  });
+      pageTitle: "My Bookings",
+      value: "bookings",
+    });
+  });
 };
-
 
 exports.getFavouriteList = (req, res, next) => {
   Home.fetchAll((registerHome) => {
-  res.render("store/favourite-list", {
+    res.render("store/favourite-list", {
       registerHome: registerHome,
-    pageTitle: "My favourite list",
-    value: "favourite",
-  })});
+      pageTitle: "My favourite list",
+      value: "favourite",
+    });
+  });
+};
+
+
+
+exports.getHomesDetails = (req, res, next) => {
+  const homeId = req.params.homeId;
+  console.log("at Home Details Page", homeId);
+
+  Home.findById(homeId, (home) => {
+    if (!home) {
+      res.redirect("/home-list");
+    } else {
+      res.render("store/home-detail", {
+        home:home,
+        pageTitle: "Home Details",
+        value: "home",
+      });
+    }
+  });
 };
