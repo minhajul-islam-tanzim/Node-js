@@ -32,13 +32,16 @@ exports.getBookings = (req, res, next) => {
 };
 
 exports.getFavouriteList = (req, res, next) => {
+Favourite.getFavourite((favourite) => {
   Home.fetchAll((registerHome) => {
+    const favouriteHome = registerHome.filter(home => favourite.includes(home.id))
     res.render("store/favourite-list", {
-      registerHome: registerHome,
+      favouriteHome: favouriteHome,
       pageTitle: "My favourite list",
       value: "favourite",
     });
   });
+})  
 };
 
 

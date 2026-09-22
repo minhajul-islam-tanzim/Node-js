@@ -23,7 +23,11 @@ module.exports = class Favourite {
 
   static getFavourite(callback){
     fs.readFile(favouriteDataPath, (err, data) => {
-      callback(!err ? JSON.parse(data): [])
+      if(err || !data.length){
+        callback([])
+      }else{
+        callback(JSON.parse(data))
+      }
     })
   }
 
