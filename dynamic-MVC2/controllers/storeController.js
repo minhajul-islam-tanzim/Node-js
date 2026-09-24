@@ -3,7 +3,7 @@ const Favourite = require("../models/favourite");
 const Home = require("../models/homeDataShow");
 
 
-//1. fetch kore sob bar ana hocche ar =registerHome= hocche kono array na eii ta call back function 
+//1. fetch call kore sob bar ana hocche ar =registerHome= hocche kono array na eii ta call back function er parameter eii khane JSon er data obj hoye karon oii khane parse kore pathano hoyeche   
 exports.getIndex = (req, res, next) => {
   Home.fetchAll( (registerHome) => {
     res.render("store/index", {

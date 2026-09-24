@@ -3,41 +3,20 @@ const Home = require("../models/homeDataShow");
 
 
 
-
+// form tag gula jeii path e ache seii khane niye jabe 
 exports.getAddHome = (req, res, next) => {
     res.render("host/edit-home", 
         {pageTitle: 'Form path',
              value: 'add-home',
                 editing: false,
       
-            })
+  })
 
 }
 
-
-
-exports.getHostHome = (req, res, next) => {
-  Home.fetchAll((registerHome) => {
-    res.render("host/host-home-list", {
-      registerHome: registerHome,
-      pageTitle: "Host homes",
-      value: "host-home",
-    });
-  });
-};
-
-
-
-
-
-
-
-
-
+// form jokhon submit korbe tokhon eii function ta colbe 
 exports.postAddHome = (req, res, next) => {
-
     const {houseName, price, location, rating, photoUrl} = req.body
-
     const home = new Home(houseName, price, location, rating, photoUrl)
 
     home.save()
@@ -46,6 +25,18 @@ exports.postAddHome = (req, res, next) => {
     
 }
 
+
+
+exports.getHostHome = (req, res, next) => {
+  
+  Home.fetchAll((registerHome) => {
+    res.render("host/host-home-list", {
+      registerHome: registerHome,
+      pageTitle: "Host homes",
+      value: "host-home",
+    });
+  });
+};
 
 
 
