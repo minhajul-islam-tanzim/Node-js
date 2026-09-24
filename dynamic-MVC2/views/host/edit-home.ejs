@@ -1,0 +1,68 @@
+<%-include('../partials/head') %>
+<body>
+<%- include('../partials/nav') %>
+
+
+<header class="bg-white shadow-md py-6 mb-10">
+  <h1 class="text-2xl font-bold text-center text-red-700">
+    <%=editing ? "Edit" : "Register"%> your home here:
+  </h1>
+</header>
+
+<main class="max-w-md mx-auto px-4">
+  <form action="/host/<%= editing ? 'edit-home' : 'add-home' %>" method="POST" class="bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
+
+<input type="hidden"
+ name="id" 
+ value="<%= editing ? home.id : '' %>">
+
+    <input
+      type="text"
+      name="houseName"
+      value="<%= editing ? home.houseName : '' %>"
+      placeholder="Enter your house name"
+      class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
+    />
+    <input
+      type="text"
+      name="price"
+            value="<%= editing ? home.price : '' %>"
+
+      placeholder="Prices"
+      class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
+    />
+    <input
+      type="text"
+      name="location"
+                  value="<%= editing ? home.location : '' %>"
+
+      placeholder="Location"
+      class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
+    />
+    <input
+      type="text"
+      name="rating"
+                  value="<%= editing ? home.rating : '' %>"
+
+      placeholder="Rating"
+      class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
+    />
+    <input
+      type="text"
+      name="photoUrl"
+                  value="<%= editing ? home.photoUrl : '' %>"
+
+      placeholder="PhotoUrl"
+      class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
+    />
+
+    <input
+      type="submit"
+      value="<%=editing ? 'Update': 'Register'%> Home"
+      class="bg-red-700 text-white font-semibold rounded-lg py-2 cursor-pointer hover:bg-red-800 transition-colors duration-300"
+    />
+
+  </form>
+</main>
+</body>
+</html>

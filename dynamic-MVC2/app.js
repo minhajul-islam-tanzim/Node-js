@@ -38,6 +38,10 @@ app.use("/host", hostRouter)
 
 app.use(error.error)
 
+
+
+
+
 const PORT = 3002;
 app.listen(PORT, () => {
     console.log(`server is running http://localhost:${PORT}`)

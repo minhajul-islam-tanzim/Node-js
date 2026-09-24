@@ -1,8 +1,11 @@
 const Favourite = require("../models/favourite");
+
 const Home = require("../models/homeDataShow");
 
+
+//1. fetch kore sob bar ana hocche ar =registerHome= hocche kono array na eii ta call back function 
 exports.getIndex = (req, res, next) => {
-  Home.fetchAll((registerHome) => {
+  Home.fetchAll( (registerHome) => {
     res.render("store/index", {
       registerHome: registerHome,
       pageTitle: "airbnb homes",
@@ -10,6 +13,9 @@ exports.getIndex = (req, res, next) => {
     });
   });
 };
+
+
+
 
 exports.getHome = (req, res, next) => {
   Home.fetchAll((registerHome) => {
@@ -31,7 +37,13 @@ exports.getBookings = (req, res, next) => {
   });
 };
 
+
+
+
+
+
 exports.getFavouriteList = (req, res, next) => {
+
 Favourite.getFavourite((favourite) => {
   Home.fetchAll((registerHome) => {
     const favouriteHome = registerHome.filter(home => favourite.includes(home.id))
@@ -45,7 +57,9 @@ Favourite.getFavourite((favourite) => {
 };
 
 
+
 exports.postAddToFavourite = (req, res, next) => {
+  
   console.log("came to to add favourite",req.body)
   Favourite.addTofavourite(req.body.id, error => {
     if(error){
@@ -55,9 +69,6 @@ exports.postAddToFavourite = (req, res, next) => {
   })
 
 }
-
-
-
 
 
 exports.getHomesDetails = (req, res, next) => {

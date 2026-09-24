@@ -5,11 +5,15 @@ const Home = require("../models/homeDataShow");
 
 
 exports.getAddHome = (req, res, next) => {
-    res.render("host/home-added", 
+    res.render("host/edit-home", 
         {pageTitle: 'Form path',
-             value: 'add-home'})
+             value: 'add-home',
+                editing: false,
+      
+            })
 
 }
+
 
 
 exports.getHostHome = (req, res, next) => {
@@ -21,6 +25,13 @@ exports.getHostHome = (req, res, next) => {
     });
   });
 };
+
+
+
+
+
+
+
 
 
 exports.postAddHome = (req, res, next) => {
@@ -35,3 +46,28 @@ exports.postAddHome = (req, res, next) => {
     
 }
 
+
+
+
+exports.getEditHome = (req, res, next) => {
+
+  const homeId = req.params.homeId;
+  const editing = req.query.editing === 'true';
+
+  Home.findById(homeId, home => {
+    if(!home){
+      console.log("home is not here")
+      return res.redirect("host/host-home-list")
+    }
+    console.log(home)
+      console.log('thats all ', homeId, editing)
+  res.render('host/edit-home', {
+    pageTitle: 'Edit your home', value: 'host-home',
+    editing: editing,
+    home: home
+  })
+
+  })
+
+
+}

@@ -4,12 +4,29 @@ const storeRouter = express.Router();
 const storeController = require("../controllers/storeController");
 
 
+// For Home Page 
 storeRouter.get("/", storeController.getIndex);
-storeRouter.get("/index", storeController.getHome );
+
+
+
+storeRouter.get("/index", storeController.getHome);
+
+
 storeRouter.get("/home-list", storeController.getHome);
+
+
 storeRouter.get("/bookings", storeController.getBookings);
+
+
+storeRouter.get("/homes/:homeId", storeController.getHomesDetails);
+
+
+
 storeRouter.get("/favourite-list", storeController.getFavouriteList);
-storeRouter.get("/homes/:homeId", storeController.getHomesDetails)
-storeRouter.post("/favourite-list", storeController.postAddToFavourite)
+
+
+storeRouter.post("/favourite-list", storeController.postAddToFavourite);
+
+
 
 exports.storeRouter = storeRouter;
