@@ -2,7 +2,6 @@
 const fs = require("fs");
 const path = require("path");
 const rootDir = require("../utils/utils");
-const { error } = require("console");
 
   // JSON Data File => home.json
   const homeDataPath = path.join(rootDir, "data", "homes.json");
@@ -43,11 +42,14 @@ module.exports = class Home {
   }
 
 
+//  je home e click kora hoyeche tar id match kore kina taii eii function ar eii ta call back e match hoye id ala obj ta pathai  
 
 static findById(homeId, callback){
-    this.fetchAll(homes => {
-    const homeDetails = homes.find( home => home.id === homeId)
-    callback(homeDetails)
+    Home.fetchAll(homes => {
+      const homeDetails = homes.find(home => home.id === homeId)
+      callback(homeDetails)
     })
+
+
 }
 };

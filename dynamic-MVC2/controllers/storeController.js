@@ -16,7 +16,7 @@ exports.getIndex = (req, res, next) => {
 
 
 
-
+// Home list Page 
 exports.getHome = (req, res, next) => {
   Home.fetchAll((registerHome) => {
     res.render("store/home-list", {
@@ -27,6 +27,9 @@ exports.getHome = (req, res, next) => {
   });
 };
 
+
+
+// for Booking Page 
 exports.getBookings = (req, res, next) => {
   Home.fetchAll((registerHome) => {
     res.render("store/bookings", {
@@ -71,6 +74,8 @@ exports.postAddToFavourite = (req, res, next) => {
 }
 
 
+
+// every single home Details page
 exports.getHomesDetails = (req, res, next) => {
   const homeId = req.params.homeId;
   console.log("at Home Details Page", homeId);

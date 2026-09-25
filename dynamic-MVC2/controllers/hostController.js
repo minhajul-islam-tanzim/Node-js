@@ -26,9 +26,9 @@ exports.postAddHome = (req, res, next) => {
 }
 
 
-
+// same like / path 
 exports.getHostHome = (req, res, next) => {
-  
+
   Home.fetchAll((registerHome) => {
     res.render("host/host-home-list", {
       registerHome: registerHome,
@@ -39,7 +39,7 @@ exports.getHostHome = (req, res, next) => {
 };
 
 
-
+// home edit korbe 
 exports.getEditHome = (req, res, next) => {
 
   const homeId = req.params.homeId;

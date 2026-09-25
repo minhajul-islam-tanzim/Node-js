@@ -12,10 +12,11 @@ hostRouter.get("/add-home", hostController.getAddHome)
 hostRouter.post("/add-home", hostController.postAddHome)
 
 
-
-
+// same path mane homes gula thakbe get mane server theke pabe 
 hostRouter.get("/host-home-list", hostController.getHostHome)
 
+
+// mane edit kore change korbe taii post 
 hostRouter.get("/edit-home/:homeId", hostController.getEditHome)
 
 exports.hostRouter = hostRouter;
