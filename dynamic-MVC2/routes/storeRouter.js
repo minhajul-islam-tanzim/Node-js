@@ -2,6 +2,7 @@ const express = require("express");
 const storeRouter = express.Router();
 
 const storeController = require("../controllers/storeController");
+const Favourite = require("../models/favourite");
 
 
 // For Home Page 
@@ -21,10 +22,10 @@ storeRouter.get("/bookings", storeController.getBookings);
 storeRouter.get("/homes/:homeId", storeController.getHomesDetails);
 
 
-
+// Favourite list dekhabe 
 storeRouter.get("/favourite-list", storeController.getFavouriteList);
 
-
+// favourite list e add korbe 
 storeRouter.post("/favourite-list", storeController.postAddToFavourite);
 
 

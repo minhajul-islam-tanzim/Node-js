@@ -19,4 +19,6 @@ hostRouter.get("/host-home-list", hostController.getHostHome)
 // mane edit kore change korbe taii post 
 hostRouter.get("/edit-home/:homeId", hostController.getEditHome)
 
+hostRouter.post("/edit-home", hostController.postEditHome)
+
 exports.hostRouter = hostRouter;

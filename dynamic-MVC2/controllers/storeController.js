@@ -42,39 +42,6 @@ exports.getBookings = (req, res, next) => {
 
 
 
-
-
-
-exports.getFavouriteList = (req, res, next) => {
-
-Favourite.getFavourite((favourite) => {
-  Home.fetchAll((registerHome) => {
-    const favouriteHome = registerHome.filter(home => favourite.includes(home.id))
-    res.render("store/favourite-list", {
-      favouriteHome: favouriteHome,
-      pageTitle: "My favourite list",
-      value: "favourite",
-    });
-  });
-})  
-};
-
-
-
-exports.postAddToFavourite = (req, res, next) => {
-  
-  console.log("came to to add favourite",req.body)
-  Favourite.addTofavourite(req.body.id, error => {
-    if(error){
-      console.log('error is coming and destroy your app')
-    }
-    res.redirect('/favourite-list')
-  })
-
-}
-
-
-
 // every single home Details page
 exports.getHomesDetails = (req, res, next) => {
   const homeId = req.params.homeId;
@@ -92,3 +59,38 @@ exports.getHomesDetails = (req, res, next) => {
     }
   });
 };
+
+
+
+
+exports.getFavouriteList = (req, res, next) => {
+
+// eii khane getFavourite ke call kora hbe oii khan theke file read hbe mane favourite.Json file ta oii tar sathe home.json file er compare hbe then compare kore je je data asbe oii ta oiita dekhabe 
+Favourite.getFavourite((favourite) => {
+
+  Home.fetchAll((registerHome) => {
+    const favouriteHome = registerHome.filter(home => favourite.includes(home.id))
+    res.render("store/favourite-list", {
+      favouriteHome: favouriteHome,
+      pageTitle: "My favourite list",
+      value: "favourite",
+    });
+  });
+})  
+};
+
+
+
+
+// post korar smy eii khane post er sathe id ta pathano hoyeche eii khane id ta body theke recieve korte hbe then addtofavourite function ta model er moddhe  ache oii khane id ta and ekta error function send kora hoyeche 
+exports.postAddToFavourite = (req, res, next) => {
+
+  console.log("came to to add favourite",req.body)
+  Favourite.addTofavourite(req.body.id, error => {
+    if(error){
+      console.log('error is coming and destroy your app')
+    }
+    res.redirect('/favourite-list')
+  })
+
+}
