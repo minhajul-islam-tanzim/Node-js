@@ -9,18 +9,20 @@ exports.getAddHome = (req, res, next) => {
   });
 };
 
-// form jokhon submit korbe tokhon eii function ta colbe
+// form jokhon submit korbe tokhon eii function ta colbe edit o kora habe 
 exports.postAddHome = (req, res, next) => {
   const { houseName, price, location, rating, photoUrl, id } = req.body;
   const home = new Home(houseName, price, location, rating, photoUrl, id);
 
   home.save();
+  res.redirect("/host/host-home-list");
 
-  res.render("host/contactSuccess", {
-    pageTitle: "successFully Run",
-    value: "add-home",
-  });
 };
+
+
+
+
+
 
 // same like / path
 exports.getHostHome = (req, res, next) => {
@@ -55,11 +57,11 @@ exports.getEditHome = (req, res, next) => {
 };
 
 
-exports.postEditHome = (req, res, next) => {
-  const { id, houseName, price, location, rating, photoUrl } = req.body;
-  const home = new Home(houseName, price, location, rating, photoUrl, id);
 
-  home.save()
+exports.postDeleteHome = (req, res, next) => {
+  const homeId = req.params.homeId 
+    Home.deleteById(homeId, (error) => {
+      res.redirect("/host/host-home-list")
+    })
 
-  res.redirect("/host/host-home-list");
-};
+}

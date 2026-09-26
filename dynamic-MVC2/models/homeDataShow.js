@@ -33,6 +33,14 @@ module.exports = class Home {
       fs.writeFile(homeDataPath, JSON.stringify(registerHome), (error) => {
         console.log("file is not working", error);
       });
+
+
+
+
+fs.writeFile(homeDataPath, JSON.stringify(registerHome), (error) => {
+        console.log("file is not working", error);
+      });
+
     });
   }
 
@@ -57,5 +65,10 @@ module.exports = class Home {
     });
   }
 
-  static updateHome() {}
+  static deleteById(homeId, callback) {
+    Home.fetchAll(registerHome => {
+        const updateHome = registerHome.filter(home => home.id !== homeId)
+        fs.writeFile(homeDataPath, JSON.stringify(updateHome), callback)
+    })
+  }
 };
