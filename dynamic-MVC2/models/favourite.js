@@ -39,13 +39,10 @@ module.exports = class Favourite {
   }
 
 
-    static deleteById(homeId, callback) {
-    Home.fetchAll(registerHome => {
-        const updateHome = registerHome.filter(home => home.id !== homeId)
-        fs.writeFile(homeDataPath, JSON.stringify(updateHome), callback)
-    })
-  }
+static deleteById(delHomeId, callback) {
+  Favourite.getFavourite(favouriteIds => {
+    const updatedFavourites = favouriteIds.filter(id => id !== delHomeId)
+    fs.writeFile(favouriteDataPath, JSON.stringify(updatedFavourites), callback)
+  })}
 
-
-
-};
+}

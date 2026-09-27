@@ -29,5 +29,9 @@ storeRouter.get("/favourite-list", storeController.getFavouriteList);
 storeRouter.post("/favourite-list", storeController.postAddToFavourite);
 
 
+// for remove to favourite list
+storeRouter.post("/favourite/delete/:homeId", storeController.postRemoveFromFavourit)
+
+
 
 exports.storeRouter = storeRouter;
