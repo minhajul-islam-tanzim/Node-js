@@ -2,6 +2,8 @@
 const fs = require("fs");
 const path = require("path");
 const rootDir = require("../utils/utils");
+const { error } = require("console");
+const Favourite = require("./favourite");
 
 // JSON Data File => home.json
 const homeDataPath = path.join(rootDir, "data", "homes.json");
@@ -68,7 +70,9 @@ fs.writeFile(homeDataPath, JSON.stringify(registerHome), (error) => {
   static deleteById(homeId, callback) {
     Home.fetchAll(registerHome => {
         const updateHome = registerHome.filter(home => home.id !== homeId)
-        fs.writeFile(homeDataPath, JSON.stringify(updateHome), callback)
+        fs.writeFile(homeDataPath, JSON.stringify(updateHome), error => {
+          Favourite.deleteById(homeId, callback)
+        })
     })
   }
 };
