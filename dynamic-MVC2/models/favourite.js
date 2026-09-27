@@ -38,4 +38,14 @@ module.exports = class Favourite {
     })
   }
 
+
+    static deleteById(homeId, callback) {
+    Home.fetchAll(registerHome => {
+        const updateHome = registerHome.filter(home => home.id !== homeId)
+        fs.writeFile(homeDataPath, JSON.stringify(updateHome), callback)
+    })
+  }
+
+
+
 };
