@@ -13,6 +13,7 @@ const db = require('./utils/dataBaseUtils')
 
 db.execute('SELECT * FROM homes;')
 .then(([rows, fields]) => {
+    
     console.log('Getting from DB', rows, fields)
 }).catch(error => {
     console.log('error like in db mysql')
