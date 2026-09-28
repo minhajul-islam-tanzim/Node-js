@@ -552,9 +552,6 @@
     .hover\:bg-blue-700:hover {
       background-color: var(--color-blue-700);
     }
-    .hover\:bg-green-600:hover {
-      background-color: var(--color-green-600);
-    }
     .hover\:bg-green-800:hover {
       background-color: var(--color-green-800);
     }
