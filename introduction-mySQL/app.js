@@ -5,10 +5,21 @@ const express = require('express')
 const path = require('path')
 
 // local module 
-const rootDir = require('./utils/utils')
 const error = require('./controllers/error')
 const { storeRouter } = require('./routes/storeRouter')
 const { hostRouter } = require('./routes/hostRouter')
+const rootDir = require('./utils/utils')
+const db = require('./utils/dataBaseUtils')
+
+db.execute('SELECT * FROM homes;')
+.then(result => {
+    console.log('Getting from DB', result)
+}).catch(error => {
+    console.log('error like in db mysql')
+})
+
+
+
 
 const app = express()
 
