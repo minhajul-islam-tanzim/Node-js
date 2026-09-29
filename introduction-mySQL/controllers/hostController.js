@@ -11,8 +11,8 @@ exports.getAddHome = (req, res, next) => {
 
 // form jokhon submit korbe tokhon eii function ta colbe edit o kora habe 
 exports.postAddHome = (req, res, next) => {
-  const { houseName, price, location, rating, photoUrl, id } = req.body;
-  const home = new Home(houseName, price, location, rating, photoUrl, id);
+  const { houseName, price, location, rating, photoUrl,description, id } = req.body;
+  const home = new Home(houseName, price, location, rating, photoUrl,description, id);
 
   home.save();
   res.redirect("/host/host-home-list");
@@ -26,7 +26,8 @@ exports.postAddHome = (req, res, next) => {
 
 // same like / path
 exports.getHostHome = (req, res, next) => {
-  Home.fetchAll((registerHome) => {
+  Home.fetchAll().then(([registerHome, fields]) => {
+
     res.render("host/host-home-list", {
       registerHome: registerHome,
       pageTitle: "Host homes",

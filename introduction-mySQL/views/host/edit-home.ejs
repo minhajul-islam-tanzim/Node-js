@@ -40,6 +40,7 @@
       placeholder="Location"
       class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
     />
+
     <input
       type="text"
       name="rating"
@@ -48,6 +49,7 @@
       placeholder="Rating"
       class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
     />
+
     <input
       type="text"
       name="photoUrl"
@@ -56,6 +58,16 @@
       placeholder="PhotoUrl"
       class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
     />
+
+  <textarea
+  name="description"
+  placeholder="Describe about your home"
+  class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
+><%= editing ? home.description : '' %></textarea>
+
+
+
+
 
     <input
       type="submit"

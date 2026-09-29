@@ -2,23 +2,23 @@ const Favourite = require("../models/favourite");
 
 const Home = require("../models/homeDataShow");
 
-
-//1. fetch call kore sob bar ana hocche ar =registerHome= hocche kono array na eii ta call back function er parameter eii khane JSon er data obj hoye karon oii khane parse kore pathano hoyeche   
+  
 exports.getIndex = (req, res, next) => {
-  Home.fetchAll( (registerHome) => {
+  Home.fetchAll().then(([registerHome, fields]) => {
     res.render("store/index", {
       registerHome: registerHome,
       pageTitle: "airbnb homes",
       value: "index",
     });
   });
-};
+  };
+
 
 
 
 // Home list Page 
 exports.getHome = (req, res, next) => {
-  Home.fetchAll((registerHome) => {
+  Home.fetchAll().then(([registerHome, fields]) => {
     res.render("store/home-list", {
       registerHome: registerHome,
       pageTitle: "home list",
@@ -31,7 +31,7 @@ exports.getHome = (req, res, next) => {
 
 // for Booking Page 
 exports.getBookings = (req, res, next) => {
-  Home.fetchAll((registerHome) => {
+  Home.fetchAll().then(([registerHome, fields]) => {
     res.render("store/bookings", {
       registerHome: registerHome,
       pageTitle: "My Bookings",
@@ -68,7 +68,8 @@ exports.getFavouriteList = (req, res, next) => {
 // eii khane getFavourite ke call kora hbe oii khan theke file read hbe mane favourite.Json file ta oii tar sathe home.json file er compare hbe then compare kore je je data asbe oii ta oiita dekhabe 
 Favourite.getFavourite((favourite) => {
 
-  Home.fetchAll((registerHome) => {
+  Home.fetchAll().then(([registerHome, fields]) => {
+
     const favouriteHome = registerHome.filter(home => favourite.includes(home.id))
     res.render("store/favourite-list", {
       favouriteHome: favouriteHome,

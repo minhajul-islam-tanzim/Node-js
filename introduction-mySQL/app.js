@@ -11,17 +11,6 @@ const { hostRouter } = require('./routes/hostRouter')
 const rootDir = require('./utils/utils')
 
 
-// DataBase 
-const db = require('./utils/dataBaseUtils')
-
-// DataBase Exicute 
-db.execute('SELECT * FROM homes;')
-.then(([rows, fields]) => {
-    
-    console.log('Getting from DB', rows, fields)
-}).catch(error => {
-    console.log('error like in db mysql')
-})
 
 
 
