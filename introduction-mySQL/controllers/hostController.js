@@ -61,8 +61,8 @@ exports.getEditHome = (req, res, next) => {
 
 exports.postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId 
-    Home.deleteById(homeId, (error) => {
-      res.redirect("/host/host-home-list")
-    })
+    Home.deleteById(homeId).then(  res.redirect("/host/host-home-list")).catch((error) => {
+        console.log("error for deleting", error)
+    }) 
 
 }
