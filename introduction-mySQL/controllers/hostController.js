@@ -13,7 +13,6 @@ exports.getAddHome = (req, res, next) => {
 exports.postAddHome = (req, res, next) => {
   const { houseName, price, location, rating, photoUrl,description, id } = req.body;
   const home = new Home(houseName, price, location, rating, photoUrl,description, id);
-
   home.save();
   res.redirect("/host/host-home-list");
 
@@ -41,22 +40,26 @@ exports.getEditHome = (req, res, next) => {
   const homeId = req.params.homeId;
   const editing = req.query.editing === "true";
 
-  Home.findById(homeId, (home) => {
-    if (!home) {
-      console.log("home is not here");
-      return res.redirect("host/host-home-list");
-    }
-    console.log(home);
-    console.log("thats all ", homeId, editing);
-    res.render("host/edit-home", {
-      pageTitle: "Edit your home",
-      value: "host-home",
-      editing: editing,
-      home: home,
-    });
-  });
-};
+  Home.findById(homeId)
+    .then(([homes]) => {
+      const home = homes[0];
 
+      if (!home) {
+        console.log("home is not here");
+        return res.redirect("/host/host-home-list");
+      }
+
+      res.render("host/edit-home", {
+        pageTitle: "Edit your home",
+        value: "host-home",
+        editing: editing,
+        home: home,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 
 exports.postDeleteHome = (req, res, next) => {
