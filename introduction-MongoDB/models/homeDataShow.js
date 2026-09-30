@@ -1,7 +1,10 @@
 // DataBase
 const { getdb } = require("../utils/dataBaseUtils");
 
+
 // DataBase Exicute
+
+
 
 module.exports = class Home {
   constructor(houseName, price, location, rating, photoUrl, description, id) {
@@ -15,19 +18,22 @@ module.exports = class Home {
   }
 
   save() {
-    const db = getdb();
-    return db.collection("homes").insertOne(this);
+      const db = getdb();
+
+  return db.collection("homes").insertOne(this);
   }
 
   static fetchAll() {
-
+      const db = getdb();
+    return db.collection("homes").find().toArray()
   }
+
 
   static findById(homeId) {
 
   }
 
   static deleteById(homeId) {
-    
+
   }
 };

@@ -4,7 +4,7 @@ const Home = require("../models/homeDataShow");
 
   
 exports.getIndex = (req, res, next) => {
-  Home.fetchAll().then(([registerHome, fields]) => {
+  Home.fetchAll().then((registerHome) => {
     res.render("store/index", {
       registerHome: registerHome,
       pageTitle: "airbnb homes",
@@ -18,7 +18,7 @@ exports.getIndex = (req, res, next) => {
 
 // Home list Page 
 exports.getHome = (req, res, next) => {
-  Home.fetchAll().then(([registerHome, fields]) => {
+  Home.fetchAll().then((registerHome) => {
     res.render("store/home-list", {
       registerHome: registerHome,
       pageTitle: "home list",
@@ -31,7 +31,7 @@ exports.getHome = (req, res, next) => {
 
 // for Booking Page 
 exports.getBookings = (req, res, next) => {
-  Home.fetchAll().then(([registerHome, fields]) => {
+  Home.fetchAll().then((registerHome) => {
     res.render("store/bookings", {
       registerHome: registerHome,
       pageTitle: "My Bookings",
@@ -69,7 +69,7 @@ exports.getFavouriteList = (req, res, next) => {
 // eii khane getFavourite ke call kora hbe oii khan theke file read hbe mane favourite.Json file ta oii tar sathe home.json file er compare hbe then compare kore je je data asbe oii ta oiita dekhabe 
 Favourite.getFavourite((favourite) => {
 
-  Home.fetchAll().then(([registerHome, fields]) => {
+  Home.fetchAll().then((registerHome) => {
 
     const favouriteHome = registerHome.filter(home => favourite.includes(home.id))
     res.render("store/favourite-list", {

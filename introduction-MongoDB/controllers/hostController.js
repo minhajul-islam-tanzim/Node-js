@@ -21,13 +21,9 @@ exports.postAddHome = (req, res, next) => {
 };
 
 
-
-
-
-M
 // same like / path
 exports.getHostHome = (req, res, next) => {
-  Home.fetchAll().then(([registerHome, fields]) => {
+    Home.fetchAll().then((registerHome) => {
 
     res.render("host/host-home-list", {
       registerHome: registerHome,
