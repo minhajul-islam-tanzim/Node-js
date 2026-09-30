@@ -24,12 +24,12 @@ module.exports = class Home {
 
     // karon id update how jabe na ta hone new id dite thakbe per change e
     const updateFields = {
-      houseName: houseName,
-      price: price,
-      location: location,
-      rating: rating,
-      photoUrl: photoUrl,
-      description: description,
+      houseName: this.houseName,
+      price: this.price,
+      location: this.location,
+      rating: this.rating,
+      photoUrl: this.photoUrl,
+      description: this.description,
     };
 
     if (this._id) {
