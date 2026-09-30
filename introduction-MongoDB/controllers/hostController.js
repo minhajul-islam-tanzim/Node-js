@@ -13,7 +13,9 @@ exports.getAddHome = (req, res, next) => {
 exports.postAddHome = (req, res, next) => {
   const { houseName, price, location, rating, photoUrl,description, id } = req.body;
   const home = new Home(houseName, price, location, rating, photoUrl,description, id);
-  home.save();
+  home.save().then(result => {
+    console.log('This is the last result')
+  });
   res.redirect("/host/host-home-list");
 
 };
@@ -22,7 +24,7 @@ exports.postAddHome = (req, res, next) => {
 
 
 
-
+M
 // same like / path
 exports.getHostHome = (req, res, next) => {
   Home.fetchAll().then(([registerHome, fields]) => {
