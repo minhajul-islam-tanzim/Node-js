@@ -9,22 +9,28 @@ exports.getAddHome = (req, res, next) => {
   });
 };
 
-// form jokhon submit korbe tokhon eii function ta colbe edit o kora habe 
+// form jokhon submit korbe tokhon eii function ta colbe edit o kora habe
 exports.postAddHome = (req, res, next) => {
-  const { houseName, price, location, rating, photoUrl,description, id } = req.body;
-  const home = new Home(houseName, price, location, rating, photoUrl,description, id);
-  home.save().then(result => {
-    console.log('This is the last result')
+  const { houseName, price, location, rating, photoUrl, description, _id } =
+    req.body;
+  const home = new Home(
+    houseName,
+    price,
+    location,
+    rating,
+    photoUrl,
+    description,
+    _id,
+  );
+  home.save().then((result) => {
+    console.log("This is the last result");
   });
   res.redirect("/host/host-home-list");
-
 };
-
 
 // same like / path
 exports.getHostHome = (req, res, next) => {
-    Home.fetchAll().then((registerHome) => {
-
+  Home.fetchAll().then((registerHome) => {
     res.render("host/host-home-list", {
       registerHome: registerHome,
       pageTitle: "Host homes",
@@ -39,8 +45,8 @@ exports.getEditHome = (req, res, next) => {
   const editing = req.query.editing === "true";
 
   Home.findById(homeId)
-    .then(([homes]) => {
-      const home = homes[0];
+    .then((home) => {
+  
 
       if (!home) {
         console.log("home is not here");
@@ -60,10 +66,14 @@ exports.getEditHome = (req, res, next) => {
 };
 
 
-exports.postDeleteHome = (req, res, next) => {
-  const homeId = req.params.homeId 
-    Home.deleteById(homeId).then(  res.redirect("/host/host-home-list")).catch((error) => {
-        console.log("error for deleting", error)
-    }) 
 
-}
+exports.postDeleteHome = (req, res, next) => {
+  const homeId = req.params.homeId;
+  Home.deleteById(homeId)
+    .then(() => {
+      res.redirect("/host/host-home-list");
+    })
+    .catch((error) => {
+      console.log("error for deleting", error);
+    });
+};
