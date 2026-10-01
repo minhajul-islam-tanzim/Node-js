@@ -105,12 +105,12 @@ exports.postAddToFavourite = (req, res, next) => {
 
 
 exports.postRemoveFromFavourit = (req, res, next) => { 
- const homeId = req.params.homeId 
- Favourite.deleteById(homeId, error => {
-  if(error){
-    console.log('here is a error')
-  }
-      res.redirect('/favourite-list')
- })
+ const delHomeId = req.params.homeId 
+ Favourite.deleteById(delHomeId).then( result => {
+  console.log('delete success fully')
+ }).catch(err => {
+  console.log('there is some wrong', err)
+ }).finally( () =>  res.redirect('/favourite-list')
+ )
 
 }

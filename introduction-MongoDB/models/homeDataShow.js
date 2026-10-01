@@ -21,7 +21,6 @@ module.exports = class Home {
   save() {
     const db = getdb();
 
-
     // karon id update how jabe na ta hone new id dite thakbe per change e
     const updateFields = {
       houseName: this.houseName,
@@ -36,7 +35,10 @@ module.exports = class Home {
       // edit
       return db
         .collection("homes")
-        .updateOne({ _id: new ObjectId(String(this._id)) }, { $set: updateFields });
+        .updateOne(
+          { _id: new ObjectId(String(this._id)) },
+          { $set: updateFields },
+        );
     } else {
       // add new home
       return db.collection("homes").insertOne(this);
@@ -57,8 +59,6 @@ module.exports = class Home {
 
   static deleteById(homeId) {
     const db = getdb();
-    return db
-      .collection("homes")
-      .deleteOne({ _id: new ObjectId(String(homeId)) });
+    return db.collection("homes").deleteOne({ _id: new ObjectId(String(homeId)) });
   }
 };

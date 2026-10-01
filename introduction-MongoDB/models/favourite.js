@@ -1,5 +1,6 @@
 // core module
 
+const { ObjectId } = require("mongodb");
 const { getdb } = require("../utils/dataBaseUtils");
 
 module.exports = class Favourite {
@@ -17,5 +18,8 @@ module.exports = class Favourite {
     return db.collection("favourite").find().toArray();
   }
 
-  static deleteById(delHomeId, callback) {}
+  static deleteById(delHomeId) {
+      const db = getdb();
+      return db.collection("favourite").deleteOne({ homeId: delHomeId});
+  }
 };
