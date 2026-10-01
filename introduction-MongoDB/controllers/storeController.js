@@ -66,12 +66,12 @@ exports.getHomesDetails = (req, res, next) => {
 
 exports.getFavouriteList = (req, res, next) => {
 
-// eii khane getFavourite ke call kora hbe oii khan theke file read hbe mane favourite.Json file ta oii tar sathe home.json file er compare hbe then compare kore je je data asbe oii ta oiita dekhabe 
-Favourite.getFavourite((favourite) => {
+Favourite.getFavourite().then((favourite) => {
 
+  const favourites = favourite.map(fav => fav.homeId)
+  
   Home.fetchAll().then((registerHome) => {
-
-    const favouriteHome = registerHome.filter(home => favourite.includes(home.id))
+    const favouriteHome = registerHome.filter(home => favourites.includes(home._id.toString()))
     res.render("store/favourite-list", {
       favouriteHome: favouriteHome,
       pageTitle: "My favourite list",
@@ -83,17 +83,23 @@ Favourite.getFavourite((favourite) => {
 
 
 
-
-// post korar smy eii khane post er sathe id ta pathano hoyeche eii khane id ta body theke recieve korte hbe then addtofavourite function ta model er moddhe  ache oii khane id ta and ekta error function send kora hoyeche 
 exports.postAddToFavourite = (req, res, next) => {
-
-  console.log("came to to add favourite",req.body)
-  Favourite.addTofavourite(req.body.id, error => {
-    if(error){
-      console.log('error is coming and destroy your app')
+  const homeId = req.body.id
+  console.log('home id is here',homeId)
+  const fav = new Favourite(homeId)
+  fav.save().then(
+  (result) => {
+    console.log('this is result',result)
+  }
+  ).catch(
+    (error) => {
+      console.log('There is something wrong with this code', error)
     }
+
+  ).finally(
     res.redirect('/favourite-list')
-  })
+  )
+
 
 }
 

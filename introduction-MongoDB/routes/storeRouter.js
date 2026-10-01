@@ -2,7 +2,6 @@ const express = require("express");
 const storeRouter = express.Router();
 
 const storeController = require("../controllers/storeController");
-const Favourite = require("../models/favourite");
 
 
 // For Home Page 
