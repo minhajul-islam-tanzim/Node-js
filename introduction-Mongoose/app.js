@@ -9,7 +9,7 @@ const error = require("./controllers/error");
 const { storeRouter } = require("./routes/storeRouter");
 const { hostRouter } = require("./routes/hostRouter");
 const rootDir = require("./utils/utils");
-const {mongoConnect} = require("./utils/dataBaseUtils");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -36,8 +36,14 @@ app.use(error.error);
 
 const PORT = 3002;
 
-mongoConnect(() => {  
-  app.listen(PORT, () => {
+
+const DB_PATH = "mongodb+srv://tannuminhaj_db_user:6IyMePNYgaXwqoq2@learn-mongodb.ffrtyxe.mongodb.net/airbnb?appName=learn-MongoDB"
+
+mongoose.connect(DB_PATH).then(() => {
+    console.log('Connected with MongooDB')
+    app.listen(PORT, () => {
     console.log(`server is running http://localhost:${PORT}`);
   });
-});
+}).catch((err) => {
+  console.log("There is something wrong in db", err)
+})

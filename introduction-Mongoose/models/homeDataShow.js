@@ -1,64 +1,36 @@
-// DataBase
-const { ObjectId } = require("mongodb");
-const { getdb } = require("../utils/dataBaseUtils");
+// houseName: this.houseName,
+//     price: this.price,
+//     location: this.location,
+//     rating: this.rating,
+//     photoUrl: this.photoUrl,
+//     description: this.description,
 
-// DataBase Exicute
+// save()
+//   static fetchAll()
+//       static findById(homeId)
+//         static deleteById(homeId)
 
-module.exports = class Home {
-  constructor(houseName, price, location, rating, photoUrl, description, _id) {
-    this.houseName = houseName;
-    this.price = price;
-    this.location = location;
-    this.rating = rating;
-    this.photoUrl = photoUrl;
-    this.description = description;
+const mongoose = require("mongoose");
 
-    if (_id) {
-      this._id = _id;
-    }
-  }
+const homeSchema = new mongoose.Schema({
+  houseName: {
+     type: String,
+     required: true 
+    },
 
-  save() {
-    const db = getdb();
+  price: { 
+    type: Number, 
+    required: true
+   },
 
-    // karon id update how jabe na ta hone new id dite thakbe per change e
-    const updateFields = {
-      houseName: this.houseName,
-      price: this.price,
-      location: this.location,
-      rating: this.rating,
-      photoUrl: this.photoUrl,
-      description: this.description,
-    };
+  location: {
+     type: String,
+     required: true
+     },
 
-    if (this._id) {
-      // edit
-      return db
-        .collection("homes")
-        .updateOne(
-          { _id: new ObjectId(String(this._id)) },
-          { $set: updateFields },
-        );
-    } else {
-      // add new home
-      return db.collection("homes").insertOne(this);
-    }
-  }
+  rating: Number,
+  photoUrl: String,
+  description: String,
+});
 
-  static fetchAll() {
-    const db = getdb();
-    return db.collection("homes").find().toArray();
-  }
-
-  static findById(homeId) {
-    const db = getdb();
-    return db
-      .collection("homes")
-      .findOne({ _id: new ObjectId(String(homeId)) });
-  }
-
-  static deleteById(homeId) {
-    const db = getdb();
-    return db.collection("homes").deleteOne({ _id: new ObjectId(String(homeId)) });
-  }
-};
+module.exports = mongoose.model("Home", homeSchema)

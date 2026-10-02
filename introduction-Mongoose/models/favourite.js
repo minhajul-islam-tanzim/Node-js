@@ -1,6 +1,5 @@
 // core module
 
-const { getdb } = require("../utils/dataBaseUtils");
 
 module.exports = class Favourite {
   constructor(homeId) {
