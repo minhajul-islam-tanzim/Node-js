@@ -62,16 +62,16 @@ exports.getHomesDetails = (req, res, next) => {
 };
 
 
-
+//  for favourite list >>>
 
 exports.getFavouriteList = (req, res, next) => {
 
-Favourite.getFavourite().then((favourite) => {
+Favourite.find().then((favourite) => {
 
-  const favourites = favourite.map(fav => fav.homeId)
+  const favourites = favourite.map((fav) => fav.homeId.toString())
   console.log('there is ', favourite)
   
-  Home.find().then((registerHome) => {
+Home.find().then((registerHome) => {
     const favouriteHome = registerHome.filter(home => favourites.includes(home._id.toString()))
     res.render("store/favourite-list", {
       favouriteHome: favouriteHome,
@@ -86,25 +86,23 @@ Favourite.getFavourite().then((favourite) => {
 
 exports.postAddToFavourite = (req, res, next) => {
   const homeId = req.body.id
-  console.log('home id is here',homeId)
-  const fav = new Favourite(homeId)
-  fav.save().then(
-  (result) => {
-    console.log('this is result',result)
-  }
-  ).catch(
-    (error) => {
-      console.log('There is something wrong with this code', error)
+  Favourite.findOne({homeId}).then((fav) => {
+    if(!fav){
+      const fav = new Favourite({homeId})
+      fav.save()
     }
+  }).then(() => {
+     res.redirect("/favourite-list");
+  }).catch((err) => {
+    console.log(err)
+  })
 
-  ).finally(() => res.redirect('/favourite-list')
-  )
 }
 
 
 exports.postRemoveFromFavourit = (req, res, next) => { 
  const delHomeId = req.params.homeId 
- Favourite.deleteById(delHomeId).then( result => {
+ Favourite.findOneAndDelete(delHomeId).then( result => {
   console.log('delete success fully')
  }).catch(err => {
   console.log('there is some wrong', err)
