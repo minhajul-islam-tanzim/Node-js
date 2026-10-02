@@ -90,7 +90,7 @@ exports.postDeleteHome = (req, res, next) => {
 
   Home.findByIdAndDelete(homeId)
     .then(() => {
-      return Favourite.deleteById(homeId);
+      return Favourite.findOneAndDelete({ homeId });
     })
     .catch((error) => {
       console.log("error for deleting", error);

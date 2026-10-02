@@ -103,6 +103,7 @@ exports.postAddToFavourite = (req, res, next) => {
 exports.postRemoveFromFavourit = (req, res, next) => { 
  const delHomeId = req.params.homeId 
  Favourite.findOneAndDelete(delHomeId).then( result => {
+  
   console.log('delete success fully')
  }).catch(err => {
   console.log('there is some wrong', err)
