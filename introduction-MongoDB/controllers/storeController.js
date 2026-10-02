@@ -69,6 +69,7 @@ exports.getFavouriteList = (req, res, next) => {
 Favourite.getFavourite().then((favourite) => {
 
   const favourites = favourite.map(fav => fav.homeId)
+  console.log('there is ', favourite)
   
   Home.fetchAll().then((registerHome) => {
     const favouriteHome = registerHome.filter(home => favourites.includes(home._id.toString()))
@@ -96,11 +97,8 @@ exports.postAddToFavourite = (req, res, next) => {
       console.log('There is something wrong with this code', error)
     }
 
-  ).finally(
-    res.redirect('/favourite-list')
+  ).finally(() => res.redirect('/favourite-list')
   )
-
-
 }
 
 

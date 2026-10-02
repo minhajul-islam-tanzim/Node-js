@@ -66,14 +66,19 @@ exports.getEditHome = (req, res, next) => {
 };
 
 
+const Favourite = require("../models/favourite");
 
 exports.postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId;
-  Home.deleteById(homeId)
-    .then(() => {
-      res.redirect("/host/host-home-list");
-    })
-    .catch((error) => {
-      console.log("error for deleting", error);
-    });
+
+Home.deleteById(homeId)
+  .then(() => {
+    return Favourite.deleteById(homeId);
+  })
+  .catch((error) => {
+    console.log("error for deleting", error);
+  })
+  .finally(() => {
+    res.redirect("/host/host-home-list");
+  });
 };
