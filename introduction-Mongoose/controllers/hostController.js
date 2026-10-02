@@ -1,4 +1,5 @@
 const Home = require("../models/homeDataShow");
+const Favourite = require("../models/favourite");
 
 // form tag gula jeii path e ache seii khane niye jabe
 exports.getAddHome = (req, res, next) => {
@@ -11,26 +12,25 @@ exports.getAddHome = (req, res, next) => {
 
 // form jokhon submit korbe tokhon eii function ta colbe edit o kora habe
 exports.postAddHome = (req, res, next) => {
-  const { houseName, price, location, rating, photoUrl, description, _id } =
+  const { houseName, price, location, rating, photoUrl, description } =
     req.body;
-  const home = new Home(
+  const home = new Home({
     houseName,
     price,
     location,
     rating,
     photoUrl,
     description,
-    _id,
-  );
-  home.save().then((result) => {
-    console.log("This is the last result");
+  });
+  home.save().then(() => {
+    console.log("saved");
   });
   res.redirect("/host/host-home-list");
 };
 
 // same like / path
 exports.getHostHome = (req, res, next) => {
-  Home.fetchAll().then((registerHome) => {
+  Home.find().then((registerHome) => {
     res.render("host/host-home-list", {
       registerHome: registerHome,
       pageTitle: "Host homes",
@@ -46,8 +46,6 @@ exports.getEditHome = (req, res, next) => {
 
   Home.findById(homeId)
     .then((home) => {
-  
-
       if (!home) {
         console.log("home is not here");
         return res.redirect("/host/host-home-list");
@@ -65,20 +63,39 @@ exports.getEditHome = (req, res, next) => {
     });
 };
 
+exports.postEditHome = (req, res, next) => {
+  const { _id, houseName, price, location, rating, photoUrl, description } =
+    req.body;
+  Home.findById(_id).then((home) => {
+    home.houseName = houseName;
+    home.price = price;
+    home.location = location;
+    home.rating = rating;
+    home.photoUrl = photoUrl;
+    home.description = description;
+    home.save().then((result) => {
+      console.log("Home updated ", result);
+    }).catch(err => {
+      console.log("Error while updating ", err);
+    })
+    res.redirect("/host/host-home-list");
+  }).catch(err => {
+    console.log("Error while finding home ", err);
+  });
+};
 
-const Favourite = require("../models/favourite");
 
 exports.postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId;
 
-Home.deleteById(homeId)
-  .then(() => {
-    return Favourite.deleteById(homeId);
-  })
-  .catch((error) => {
-    console.log("error for deleting", error);
-  })
-  .finally(() => {
-    res.redirect("/host/host-home-list");
-  });
+  Home.findByIdAndDelete(homeId)
+    .then(() => {
+      return Favourite.deleteById(homeId);
+    })
+    .catch((error) => {
+      console.log("error for deleting", error);
+    })
+    .finally(() => {
+      res.redirect("/host/host-home-list");
+    });
 };

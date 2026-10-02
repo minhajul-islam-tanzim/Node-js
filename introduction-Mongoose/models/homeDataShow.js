@@ -1,14 +1,4 @@
-// houseName: this.houseName,
-//     price: this.price,
-//     location: this.location,
-//     rating: this.rating,
-//     photoUrl: this.photoUrl,
-//     description: this.description,
 
-// save()
-//   static fetchAll()
-//       static findById(homeId)
-//         static deleteById(homeId)
 
 const mongoose = require("mongoose");
 

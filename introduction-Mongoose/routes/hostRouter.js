@@ -19,7 +19,8 @@ hostRouter.get("/host-home-list", hostController.getHostHome)
 // mane edit kore change korbe taii post 
 hostRouter.get("/edit-home/:homeId", hostController.getEditHome)
 
-// for delete Home 
+hostRouter.post("/edit-home", hostController.postEditHome);
+
 hostRouter.post("/delete-home/:homeId", hostController.postDeleteHome)
 
 
