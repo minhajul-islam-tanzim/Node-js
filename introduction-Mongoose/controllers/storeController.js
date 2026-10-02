@@ -86,7 +86,7 @@ Home.find().then((registerHome) => {
 
 exports.postAddToFavourite = (req, res, next) => {
   const homeId = req.body.id
-  Favourite.findOne({homeId}).then((fav) => {
+  Favourite.findOne({homeId : homeId}).then((fav) => {
     if(!fav){
       const fav = new Favourite({homeId})
       fav.save()
