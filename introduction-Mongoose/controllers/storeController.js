@@ -66,21 +66,20 @@ exports.getHomesDetails = (req, res, next) => {
 
 exports.getFavouriteList = (req, res, next) => {
 
-Favourite.find().then((favourite) => {
-
-  const favourites = favourite.map((fav) => fav.homeId.toString())
-  console.log('there is ', favourite)
-  
-Home.find().then((registerHome) => {
-    const favouriteHome = registerHome.filter(home => favourites.includes(home._id.toString()))
+Favourite.find()
+.populate('homeId')
+.then((favourite) => {
+  console.log(favourite, "This is populate result>>>>>")
+const favouritesHome = favourite.map((fav) => fav.homeId)
+console.log('there is ',  favouritesHome)
     res.render("store/favourite-list", {
-      favouriteHome: favouriteHome,
+      favouriteHome:favouritesHome,
       pageTitle: "My favourite list",
       value: "favourite",
     });
   });
-})  
-};
+}
+;
 
 
 

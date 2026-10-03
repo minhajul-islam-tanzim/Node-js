@@ -33,8 +33,6 @@ homeSchema.pre('findOneAndDelete', async function () {
 
   await favourite.deleteMany({ homeId: homeId });
 
-
-
 });
 
 
