@@ -1,3 +1,7 @@
 exports.error = (req, res, next) => {
-    res.status(404).render('404', {pageTitle: 'page not coming',value:404})
+    res.status(404).render('404', {
+        pageTitle: 'page not coming',
+        value:404,
+        isLoggedIn: req.isLoggedIn
+    })
 }

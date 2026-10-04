@@ -31,9 +31,26 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: true }));
 
+app.use((req, res, next) => {
+  req.isLoggedIn = req.get('Cookie')?.split('=')[1] || false;
+  console.log(req.isLoggedIn);
+  next()
+
+})
+
+
 app.use(authRouter)
 
 app.use(storeRouter);
+
+app.use("/host",(req, res, next) => {
+  if(req.isLoggedIn){
+    next()
+  }else{
+    res.redirect('/login')
+  }
+
+});
 
 app.use("/host", hostRouter);
 
