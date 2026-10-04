@@ -37,6 +37,8 @@ exports.getBookings = (req, res, next) => {
       pageTitle: "My Bookings",
       value: "bookings",
     });
+  }).catch(() => {
+    console.log('not available')
   });
 };
 

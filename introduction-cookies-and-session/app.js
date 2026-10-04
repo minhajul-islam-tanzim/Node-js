@@ -8,6 +8,9 @@ const path = require("path");
 const error = require("./controllers/error");
 const { storeRouter } = require("./routes/storeRouter");
 const { hostRouter } = require("./routes/hostRouter");
+
+const {authRouter} = require('./routes/authRouter')
+
 const rootDir = require("./utils/utils");
 const mongoose = require("mongoose");
 
@@ -27,6 +30,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(authRouter)
 
 app.use(storeRouter);
 
