@@ -5,3 +5,9 @@ exports.getLogin = (req, res, next) => {
     editing: false,
   });
 };
+
+exports.postLogin = (req, res, next) => {
+  console.log('post is here ', req.body)
+  res.redirect('/')
+
+}
