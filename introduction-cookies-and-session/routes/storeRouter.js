@@ -3,7 +3,6 @@ const storeRouter = express.Router();
 
 const storeController = require("../controllers/storeController");
 
-
 // For Home Page 
 storeRouter.get("/", storeController.getIndex);
 
