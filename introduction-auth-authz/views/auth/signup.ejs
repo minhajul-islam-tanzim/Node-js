@@ -1,0 +1,99 @@
+<%-include('../partials/head') %>
+<body class="min-h-screen bg-linear-to-br from-red-50 via-white to-gray-100 text-gray-800 antialiased">
+<%- include('../partials/nav') %>
+
+
+<header class="pt-14 pb-10">
+  <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 tracking-tight after:content-[''] after:block after:w-16 after:h-1 after:bg-red-500 after:rounded-full after:mx-auto after:mt-4">
+Register Here
+  </h1>
+</header>
+
+<% if (errors.length > 0) { %>
+  <div class="max-w-md mx-auto bg-red-50 border border-red-300 rounded-lg p-4 my-4">
+    <p class="text-red-700 font-semibold mb-2 text-center">Try this</p>
+    <ul class="list-disc list-inside space-y-1">
+      <% errors.forEach(error => { %>
+        <li class="text-red-600 text-sm"><%= error %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
+<main class="max-w-md mx-auto px-4 pb-20">
+
+    <form action="/signup" method="post" class="bg-white rounded-3xl shadow-2xl shadow-gray-200/70 ring-1 ring-gray-900/5 p-6 sm:p-10 flex flex-col gap-5">
+
+    <input
+      type="text"
+      name="firstName"
+      value="<%= oldInput.firstName ? oldInput.firstName : '' %>"
+      placeholder="First name"
+      class="w-full h-12 bg-gray-50 border border-gray-200 rounded-xl px-4 text-gray-800 placeholder-gray-400 shadow-sm transition-all duration-200 hover:border-gray-300 focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-100"
+      required
+    />
+    <input
+      type="text"
+      name="lastName"
+      value="<%= oldInput.lastName ? oldInput.lastName : '' %>"
+      placeholder="Last name"
+      class="w-full h-12 bg-gray-50 border border-gray-200 rounded-xl px-4 text-gray-800 placeholder-gray-400 shadow-sm transition-all duration-200 hover:border-gray-300 focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-100"
+      required
+    />
+    <input
+      type="email"
+      name="email"
+      value="<%= oldInput.email ? oldInput.email : '' %>"
+      placeholder="Enter your Email/username"
+      class="w-full h-12 bg-gray-50 border border-gray-200 rounded-xl px-4 text-gray-800 placeholder-gray-400 shadow-sm transition-all duration-200 hover:border-gray-300 focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-100"
+      required
+    />
+    <input
+      type="password"
+      name="password"
+      value=""
+      placeholder="Enter your password"
+      class="w-full h-12 bg-gray-50 border border-gray-200 rounded-xl px-4 text-gray-800 placeholder-gray-400 shadow-sm transition-all duration-200 hover:border-gray-300 focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-100"
+      required
+    />
+    <input
+      type="password"
+      name="confirmPassword"
+      value=""
+      placeholder="Confirm password"
+      class="w-full h-12 bg-gray-50 border border-gray-200 rounded-xl px-4 text-gray-800 placeholder-gray-400 shadow-sm transition-all duration-200 hover:border-gray-300 focus:outline-none focus:bg-white focus:border-red-500 focus:ring-4 focus:ring-red-100"
+      required
+    />
+   <div class="mb-5 p-4 bg-gray-50 rounded-md border border-gray-200">
+          <p class="text-sm font-medium text-gray-700 mb-2">I want to register as:</p>
+          <div class="flex space-x-6">
+            <label class="inline-flex items-center cursor-pointer">
+              <input type="radio" name="userType" value="guest" id="guest" class="form-radio text-red-500 focus:ring-red-500" checked="<% oldInput.userType === "guest"%>" />
+              <span class="ml-2">Guest</span>
+            </label>
+            <label class="inline-flex items-center cursor-pointer">
+              <input type="radio" name="userType" value="host" id="host" class="form-radio text-red-500 focus:ring-red-500" checked="<% oldInput.userType === "host"%>"/>
+              <span class="ml-2">Host</span>
+            </label>
+          </div>
+        </div>
+
+
+  <div class="flex items-start gap-3 bg-gray-50 border border-gray-100 rounded-xl px-4 py-3">
+
+    <input type="checkbox" name="terms" id="terms" required class="mt-0.5 w-4 h-4 shrink-0 accent-red-600 cursor-pointer">
+    <label for="terms" class="text-sm leading-snug text-gray-600 cursor-pointer select-none">I agree your all of terms and conditions</label>
+    
+  </div>
+
+
+    <input
+      type="submit"
+      value="Sign me Up"
+      class="w-full h-12 mt-1 bg-linear-to-r from-red-600 to-red-500 text-white font-bold tracking-wide rounded-xl shadow-lg shadow-red-200 cursor-pointer transition-all duration-200 hover:from-red-700 hover:to-red-600 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-4 focus-visible:ring-red-200"
+    />
+
+  </form>
+</main>
+</body>
+</html>
