@@ -1,11 +1,11 @@
-<nav class="sticky top-0 z-50 flex flex-wrap items-center gap-1.5 px-6 py-3 bg-gradient-to-r from-red-600 to-red-500 shadow-lg">
+<nav class="sticky top-0 z-50 flex flex-wrap items-center gap-1.5 px-6 py-3 bg-linear-to-r from-red-600 to-red-500 shadow-lg">
 
   <a href="/"
     class="<%= value === 'index' ? 'bg-white text-red-600 shadow-md' : 'text-white/90 hover:text-white hover:bg-white/20' %> px-4 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300">
     Airbnb
   </a>
   <% if(isLoggedIn){ %>
-
+      <% if (user && user.userType === 'guest') { %>
     <a href="/home-list"
       class="<%= value === 'home-list' ? 'bg-white text-red-600 shadow-md' : 'text-white/90 hover:text-white hover:bg-white/20' %> px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300">
       Home-List
@@ -19,6 +19,7 @@
       class="<%= value === 'bookings' ? 'bg-white text-red-600 shadow-md' : 'text-white/90 hover:text-white hover:bg-white/20' %> px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300">
       Bookings
     </a>
+         <% } else { %>
     <a href="/host/host-home-list"
       class="<%= value === 'host-home' ? 'bg-white text-red-600 shadow-md' : 'text-white/90 hover:text-white hover:bg-white/20' %> px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300">
       Host-Home
@@ -28,6 +29,7 @@
       class="<%= value === 'add-home' ? 'bg-white text-red-600 shadow-md' : 'text-white/90 hover:text-white hover:bg-white/20' %> px-4 py-2 rounded-full text-sm font-semibold tracking-wide transition-all duration-300">
       Add Home
     </a>
+  <% } %>
   <% } %>
 
 <% if (!isLoggedIn) { %>

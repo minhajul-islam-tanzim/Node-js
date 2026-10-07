@@ -7,7 +7,8 @@ exports.getAddHome = (req, res, next) => {
     pageTitle: "Form path",
     value: "add-home",
     editing: false,
-    isLoggedIn: req.isLoggedIn
+    isLoggedIn: req.isLoggedIn,
+       user: req.session.user,
   });
 };
 
@@ -36,7 +37,8 @@ exports.getHostHome = (req, res, next) => {
       registerHome: registerHome,
       pageTitle: "Host homes",
       value: "host-home",
-      isLoggedIn: req.isLoggedIn
+      isLoggedIn: req.isLoggedIn,
+       user: req.session.user,
     });
   });
 };
@@ -57,7 +59,8 @@ exports.getEditHome = (req, res, next) => {
         value: "host-home",
         editing: editing,
         home: home,
-        isLoggedIn: req.isLoggedIn
+        isLoggedIn: req.isLoggedIn,
+       user: req.session.user,
       });
     })
     .catch((err) => {

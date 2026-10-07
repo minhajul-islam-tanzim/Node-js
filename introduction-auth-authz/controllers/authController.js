@@ -7,7 +7,8 @@ exports.getLogin = (req, res, next) => {
     pageTitle: "Login",
     value: "login",
     isLoggedIn: false,
-    errors: []
+    errors: [],
+    user: {},
   });
 };
 
@@ -28,9 +29,28 @@ exports.postLogin = async (req, res, next) => {
     });
   }
 
+  const passMatch = await bcrypt.compare(password, user.password)
+  if(!passMatch){
+    return res.status(422).render("auth/login", {
+      pageTitle: "Login",
+      value: "login",
+      isLoggedIn: false,
+      errors: ["!password dosen't exists"],
+  })} 
+  
   req.session.isLoggedIn = true;
+  req.session.user = {
+  _id: user._id.toString(),
+  firstName: user.firstName,
+  lastName: user.lastName,
+  email: user.email,
+  userType: user.userType,
+};
   res.redirect("/");
 };
+
+
+
 
 exports.postLogout = (req, res, next) => {
   req.session.destroy(() => {
@@ -47,6 +67,7 @@ exports.getSignUp = (req, res, next) => {
     isLoggedIn: false,
     errors: [],
     oldInput: {},
+    user: {},
   });
 };
 

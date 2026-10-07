@@ -52,12 +52,13 @@ app.use(session({
   store: store
 }))
 
-
-
 app.use((req, res, next) => {
-  req.isLoggedIn = req.session.isLoggedIn
+
+   req.isLoggedIn = req.session.isLoggedIn;
   next()
 })
+
+
 
 app.use(authRouter)
 // app.use(error.error);
@@ -68,7 +69,6 @@ app.use((req, res, next) => {
   }else{
     res.redirect('/login')
   }
-
 });
 
 app.use(storeRouter);
