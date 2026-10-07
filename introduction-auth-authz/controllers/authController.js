@@ -39,6 +39,7 @@ exports.postLogin = async (req, res, next) => {
   })} 
   
   req.session.isLoggedIn = true;
+
   req.session.user = {
   _id: user._id.toString(),
   firstName: user.firstName,
@@ -46,7 +47,11 @@ exports.postLogin = async (req, res, next) => {
   email: user.email,
   userType: user.userType,
 };
+
+req.session.save((err) => {
+  if (err) console.log(err);
   res.redirect("/");
+});
 };
 
 
