@@ -9,16 +9,8 @@ Register Here
   </h1>
 </header>
 
-<% if (errors.length > 0) { %>
-  <div class="max-w-md mx-auto bg-red-50 border border-red-300 rounded-lg p-4 my-4">
-    <p class="text-red-700 font-semibold mb-2 text-center">Try this</p>
-    <ul class="list-disc list-inside space-y-1">
-      <% errors.forEach(error => { %>
-        <li class="text-red-600 text-sm"><%= error %></li>
-      <% }) %>
-    </ul>
-  </div>
-<% } %>
+<%- include('../partials/errors') %>
+
 
 <main class="max-w-md mx-auto px-4 pb-20">
 

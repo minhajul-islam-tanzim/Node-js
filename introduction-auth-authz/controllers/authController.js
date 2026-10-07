@@ -1,18 +1,33 @@
 const { check, validationResult } = require("express-validator");
 const User = require("../models/userData");
-const bcrypt = require('bcrypt')
-
+const bcrypt = require("bcrypt");
 
 exports.getLogin = (req, res, next) => {
   res.render("auth/login", {
     pageTitle: "Login",
     value: "login",
     isLoggedIn: false,
+    errors: []
   });
 };
 
-exports.postLogin = (req, res, next) => {
-  // res.cookie("isLoggedIn", true);
+
+
+exports.postLogin = async (req, res, next) => {
+  const {email, password} = req.body;
+    console.log("Login email:", email);
+
+  const user = await User.findOne({ email });
+  console.log("Found user:", user);
+  if (!user) {
+    return res.status(422).render("auth/login", {
+      pageTitle: "Login",
+      value: "login",
+      isLoggedIn: false,
+      errors: ["Email not found"],
+    });
+  }
+
   req.session.isLoggedIn = true;
   res.redirect("/");
 };
@@ -22,6 +37,8 @@ exports.postLogout = (req, res, next) => {
     res.redirect("/login");
   });
 };
+
+
 
 exports.getSignUp = (req, res, next) => {
   res.render("auth/signup", {
@@ -103,23 +120,29 @@ exports.postSignUp = [
       });
     }
 
-
     bcrypt.hash(password, 12).then((hashPassword) => {
-
-      const user = new User({firstName, lastName, email, password: hashPassword, userType})
-      user.save().then(() => {
-        console.log(user)
-        res.redirect("/login");
-      }).catch((err) => {
-        return res.status(422).render("auth/signup", {
-          pageTitle: "SignUp",
-          value: "signup",
-          isLoggedIn: false,
-          errors: [err],
-          oldInput: { firstName, lastName, email, password, userType },
+      const user = new User({
+        firstName,
+        lastName,
+        email,
+        password: hashPassword,
+        userType,
+      });
+      user
+        .save()
+        .then(() => {
+          console.log(user);
+          res.redirect("/login");
+        })
+        .catch((err) => {
+          return res.status(422).render("auth/signup", {
+            pageTitle: "SignUp",
+            value: "signup",
+            isLoggedIn: false,
+            errors: [err],
+            oldInput: { firstName, lastName, email, password, userType },
+          });
         });
-      })
-    })
-      
+    });
   },
 ];
