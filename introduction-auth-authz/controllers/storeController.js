@@ -114,14 +114,20 @@ exports.postAddToFavourite =async (req, res, next) => {
 
 
 
-exports.postRemoveFromFavourit = (req, res, next) => { 
- const delHomeId = req.params.homeId 
- Favourite.findOneAndDelete(delHomeId).then( result => {
-  
-  console.log('delete success fully')
- }).catch(err => {
-  console.log('there is some wrong', err)
- }).finally( () =>  res.redirect('/favourite-list')
- )
+exports.postRemoveFromFavourit = async (req, res, next) => {
+  try {
+    const homeId = req.params.homeId;
+    const userId = req.session.user._id;
+    const user = await User.findById(userId);
 
-}
+    user.favourites = user.favourites.filter(
+      (fav) => fav.toString() !== homeId
+    );
+    await user.save();
+
+    res.redirect("/favourite-list");
+  } catch (err) {
+    console.log(err);
+    res.redirect("/favourite-list");
+  }
+};
