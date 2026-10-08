@@ -11,7 +11,7 @@
 
 <main class="max-w-md mx-auto px-4">
 
-    <form action="<%= editing ? '/host/edit-home' : '/host/add-home' %>" method="POST" class="bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
+    <form action="<%= editing ? '/host/edit-home' : '/host/add-home' %>" method="POST" enctype="multipart/form-data" class="bg-white rounded-xl shadow-md p-6 flex flex-col gap-4">
 
 <input type="hidden"
  name="_id" 
@@ -50,14 +50,18 @@
       class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
     />
 
-    <input
-      type="text"
-      name="photoUrl"
-                  value="<%= editing ? home.photoUrl : '' %>"
+  <input
+  type="file"
+  name="photo"
+  accept="image/*"
+  class="block w-full text-sm text-gray-600 border border-gray-300 rounded-lg cursor-pointer
+         focus:outline-none focus:ring-2 focus:ring-red-400
+         file:mr-4 file:py-2 file:px-4 file:border-0 file:rounded-l-lg
+         file:bg-red-500 file:text-white file:font-medium
+         hover:file:bg-red-600"
+/>
 
-      placeholder="PhotoUrl"
-      class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
-    />
+
 
   <textarea
   name="description"

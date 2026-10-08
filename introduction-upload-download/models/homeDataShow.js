@@ -20,7 +20,7 @@ const homeSchema = new mongoose.Schema({
      },
 
   rating: Number,
-  photoUrl: String,
+  photo: String,
   description: String,
 });
 

@@ -14,14 +14,22 @@ exports.getAddHome = (req, res, next) => {
 
 // form jokhon submit korbe tokhon eii function ta colbe edit o kora habe
 exports.postAddHome = (req, res, next) => {
-  const { houseName, price, location, rating, photoUrl, description } =
+  const { houseName, price, location, rating,  description } =
     req.body;
+
+  if(!req.file){
+    return res.status(400).send("Give me Homes Photo");
+  }
+
+    const photo = "/uploads/" + req.file.filename; 
+    console.log("HEYYYYYYYYY",photo); 
+
   const home = new Home({
     houseName,
     price,
     location,
     rating,
-    photoUrl,
+    photo,
     description,
   });
   home.save().then(() => {
@@ -69,14 +77,14 @@ exports.getEditHome = (req, res, next) => {
 };
 
 exports.postEditHome = (req, res, next) => {
-  const { _id, houseName, price, location, rating, photoUrl, description } =
+  const { _id, houseName, price, location, rating, photo, description } =
     req.body;
   Home.findById(_id).then((home) => {
     home.houseName = houseName;
     home.price = price;
     home.location = location;
     home.rating = rating;
-    home.photoUrl = photoUrl;
+    home.photo = photo;
     home.description = description;
     home.save().then((result) => {
       console.log("Home updated ", result);
