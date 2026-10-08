@@ -22,8 +22,6 @@ exports.postAddHome = (req, res, next) => {
   }
 
     const photo = "/uploads/" + req.file.filename; 
-    console.log("HEYYYYYYYYY",photo); 
-
   const home = new Home({
     houseName,
     price,
@@ -77,15 +75,21 @@ exports.getEditHome = (req, res, next) => {
 };
 
 exports.postEditHome = (req, res, next) => {
-  const { _id, houseName, price, location, rating, photo, description } =
+
+  console.log("body:", req.body);
+console.log("file:", req.file);
+  const { _id, houseName, price, location, rating, description } =
     req.body;
   Home.findById(_id).then((home) => {
     home.houseName = houseName;
     home.price = price;
     home.location = location;
     home.rating = rating;
-    home.photo = photo;
     home.description = description;
+    if(req.file){
+      home.photo = req.file.path;
+    }
+    
     home.save().then((result) => {
       console.log("Home updated ", result);
     }).catch(err => {

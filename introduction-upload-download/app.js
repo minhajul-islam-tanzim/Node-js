@@ -75,7 +75,7 @@ const store = new MongoDBStore({
 // ===== Static ফোল্ডার (css, ছবি) =====
 app.use(express.static("public"));
 app.use("/uploads", express.static(path.join(rootDir, "uploads")));
-// app.use("/host/uploads", express.static(path.join(rootDir, "uploads")));
+app.use("/host/uploads", express.static(path.join(rootDir, "uploads")));
 
 
 
@@ -93,6 +93,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: store,
+     cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7, // ৭ দিন
+    },
   })
 );
 
