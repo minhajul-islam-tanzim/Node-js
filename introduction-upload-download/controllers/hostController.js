@@ -1,5 +1,7 @@
 const Home = require("../models/homeDataShow");
-
+const fs = require("fs");
+const path = require("path");
+const rootDir = require("../utils/utils");
 
 // form tag gula jeii path e ache seii khane niye jabe
 exports.getAddHome = (req, res, next) => {
@@ -8,20 +10,19 @@ exports.getAddHome = (req, res, next) => {
     value: "add-home",
     editing: false,
     isLoggedIn: req.isLoggedIn,
-       user: req.session.user,
+    user: req.session.user,
   });
 };
 
 // form jokhon submit korbe tokhon eii function ta colbe edit o kora habe
 exports.postAddHome = (req, res, next) => {
-  const { houseName, price, location, rating,  description } =
-    req.body;
+  const { houseName, price, location, rating, description } = req.body;
 
-  if(!req.file){
+  if (!req.file) {
     return res.status(400).send("Give me Homes Photo");
   }
 
-    const photo = "/uploads/" + req.file.filename; 
+  const photo = "/uploads/" + req.file.filename;
   const home = new Home({
     houseName,
     price,
@@ -44,7 +45,7 @@ exports.getHostHome = (req, res, next) => {
       pageTitle: "Host homes",
       value: "host-home",
       isLoggedIn: req.isLoggedIn,
-       user: req.session.user,
+      user: req.session.user,
     });
   });
 };
@@ -66,7 +67,7 @@ exports.getEditHome = (req, res, next) => {
         editing: editing,
         home: home,
         isLoggedIn: req.isLoggedIn,
-       user: req.session.user,
+        user: req.session.user,
       });
     })
     .catch((err) => {
@@ -75,39 +76,51 @@ exports.getEditHome = (req, res, next) => {
 };
 
 exports.postEditHome = (req, res, next) => {
+  const { _id, houseName, price, location, rating, description } = req.body;
 
-  console.log("body:", req.body);
-console.log("file:", req.file);
-  const { _id, houseName, price, location, rating, description } =
-    req.body;
-  Home.findById(_id).then((home) => {
-    home.houseName = houseName;
-    home.price = price;
-    home.location = location;
-    home.rating = rating;
-    home.description = description;
-    if(req.file){
-      home.photo = req.file.path;
-    }
-    
-    home.save().then((result) => {
-      console.log("Home updated ", result);
-    }).catch(err => {
-      console.log("Error while updating ", err);
+  Home.findById(_id)
+    .then((home) => {
+      home.houseName = houseName;
+      home.price = price;
+      home.location = location;
+      home.rating = rating;
+      home.description = description;
+
+      if (req.file) {
+        if (home.photo) {
+          fs.unlink(path.join(rootDir, home.photo), (err) => {
+            if (err) console.log("for problem delete", err);
+          });
+        }
+        home.photo = "/uploads/" + req.file.filename;
+      }
+
+      home
+        .save()
+        .then((result) => {
+          console.log("Home updated ", result);
+        })
+        .catch((err) => {
+          console.log("Error while updating ", err);
+        });
+      res.redirect("/host/host-home-list");
     })
-    res.redirect("/host/host-home-list");
-  }).catch(err => {
-    console.log("Error while finding home ", err);
-  });
+    .catch((err) => {
+      console.log("Error while finding home ", err);
+    });
 };
-
 
 exports.postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId;
 
   Home.findByIdAndDelete(homeId)
-    .then(() => {
-      console.log('dle')
+    .then((home) => {
+      if (home.photo) {
+        const filePath = path.join(rootDir, home.photo);
+        fs.unlink(filePath, (err) => {
+          if (err) console.log("Not posiible for delete", err);
+        });
+      }
     })
     .catch((error) => {
       console.log("error for deleting", error);
