@@ -1,7 +1,9 @@
 require("dotenv").config()
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+
+const todoRouter = require("./routes/todoRouter");
 
 
 const app = express();
@@ -11,9 +13,9 @@ app.use(cors());
 app.use(express.json());
 
 
-app.get("/" , (req, res, next) => {
-    res.send("Hello")
-});
+
+app.use("/api/todos", todoRouter)
+
 
 
 const PORT = process.env.PORT || 3002

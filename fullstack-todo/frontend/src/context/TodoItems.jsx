@@ -1,4 +1,5 @@
 import { useContext, useState, createContext } from "react";
+import { addItemToServer } from "../services/itemServices";
 
 
 
@@ -8,8 +9,23 @@ export const TodoContext = createContext();
 const TodoItems = ({children}) => {
     const [todos, setTodos] = useState([])
 
-    const addTodo = (text, date) => {
-        setTodos([ ...todos, {id: Date.now(), text, date, completed: false}])
+    const addTodo = async (text, date) => {
+        try{
+            const newTodo = await addItemToServer(text, date);
+
+            const newTodoItems = [
+                ...todos,
+                newTodo
+            ]
+            setTodos(newTodoItems)
+
+
+        }catch(err){
+
+
+
+            console.log("Todo dosent exist", err.message);
+        }
     }
 
     const deleteTodo = (id) => {

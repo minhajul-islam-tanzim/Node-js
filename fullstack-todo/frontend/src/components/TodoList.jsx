@@ -1,11 +1,15 @@
 import { useContext } from "react";
 import { TodoContext } from "../context/TodoItems";
 
+
+
 const TodoList = () => {
   const { todos, deleteTodo, toggleTodo } = useContext(TodoContext);
 
   const activeTodos = todos.filter((todo) => !todo.completed);
   const completedTodos = todos.filter((todo) => todo.completed);
+
+  
 
   return (
     <div className="w-123 mx-auto mt-6">
@@ -21,9 +25,9 @@ const TodoList = () => {
               type="checkbox"
               checked={todo.completed}
               onChange={() => {
-  console.log("clicked", todo.id);
-  toggleTodo(todo.id);
-}}
+                console.log("clicked", todo.id);
+                toggleTodo(todo.id);
+              }}
             />
             <span>{todo.text}</span>
             <span className="text-gray-500">{todo.date}</span>
