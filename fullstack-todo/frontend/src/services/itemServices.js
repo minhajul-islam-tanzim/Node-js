@@ -35,5 +35,7 @@ export const deleteFromServer = async (id) => {
 }
 
 export const  toggleItemCompleted = async (id) => {
+      const response = await fetch(`${BASE_URL}/${id}`, { method: "PATCH" });
+      return await response.json()
 
 }

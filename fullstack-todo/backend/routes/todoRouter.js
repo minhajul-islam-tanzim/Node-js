@@ -5,7 +5,7 @@ const {createTodo, getTodo,  deleteTodo,  complatedTask} = require("../controlle
 todoRouter.post("/", createTodo)
 todoRouter.get("/", getTodo)
 todoRouter.delete("/:id", deleteTodo)
-todoRouter.delete("/:id", complatedTask)
+todoRouter.patch("/:id", complatedTask)
 
 
 

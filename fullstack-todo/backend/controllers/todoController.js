@@ -32,6 +32,19 @@ exports.deleteTodo = async (req, res, next) => {
 
 
 exports.complatedTask = async (req, res, next) => {
+  try{
     const { id } = req.params;
+    const todo = await Todo.findById(id)
+    if (!todo) return res.status(404).json({ message: "Todo not found" });
+    todo.completed = !todo.completed;
+    await todo.save();
+    res.json(todo)
+
+  }catch(err){
+        res.status(500).json({ message: "Don't going to update" });
+
+  }
+
+
 
 }
