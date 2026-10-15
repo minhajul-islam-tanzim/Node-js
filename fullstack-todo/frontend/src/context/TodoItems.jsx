@@ -1,5 +1,6 @@
-import { useContext, useState, createContext } from "react";
-import { addItemToServer } from "../services/itemServices";
+import {  useState, createContext } from "react";
+import { addItemToServer, fetchFromServer,  deleteFromServer } from "../services/itemServices";
+import { useEffect } from "react";
 
 
 
@@ -9,31 +10,43 @@ export const TodoContext = createContext();
 const TodoItems = ({children}) => {
     const [todos, setTodos] = useState([])
 
+const loadTodos = async () => {
+            try{
+                const items = await fetchFromServer()
+                console.log(items)
+                setTodos(items)
+            }catch(err){
+                   console.log("Todos not available", err.message);
+            }
+
+        }
+
+    useEffect(() => {
+        loadTodos()
+    }, [])
+
+
     const addTodo = async (text, date) => {
+    try {
+        await addItemToServer(text, date);
+        await loadTodos();
+    } catch (err) {
+        console.log("Todo doesn't exist", err.message);
+    }
+};
+
+    const deleteTodo = async (id) => {
         try{
-            const newTodo = await addItemToServer(text, date);
-
-            const newTodoItems = [
-                ...todos,
-                newTodo
-            ]
-            setTodos(newTodoItems)
-
-
+            await deleteFromServer(id)
+            await loadTodos();
         }catch(err){
-
-
-
-            console.log("Todo dosent exist", err.message);
+        console.log("Todo doesn't exist for delete", err.message);
         }
     }
 
-    const deleteTodo = (id) => {
-        setTodos(todos.filter((todo) => todo.id !== id))
-    }
+    
 
     const toggleTodo = (id) => {
-         console.log("toggle called", id);
         setTodos(todos.map((todo) => todo.id === id ? {...todo, completed: !todo.completed}: todo))
     }
 

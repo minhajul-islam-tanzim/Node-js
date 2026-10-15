@@ -4,6 +4,7 @@ import { TodoContext } from "../context/TodoItems";
 
 
 const TodoList = () => {
+  
   const { todos, deleteTodo, toggleTodo } = useContext(TodoContext);
 
   const activeTodos = todos.filter((todo) => !todo.completed);

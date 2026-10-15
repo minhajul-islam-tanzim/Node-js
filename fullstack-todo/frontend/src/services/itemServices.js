@@ -8,9 +8,9 @@ export const addItemToServer = async (text, date) => {
     },
     body: JSON.stringify({ text, date }),
   });
-  const serverItem = await response.json();
+  
+  return await response.json();
 
-  return mapServerItemToLocalItem(serverItem);
 };
 
 const mapServerItemToLocalItem = (serverItem) => {
@@ -21,3 +21,19 @@ const mapServerItemToLocalItem = (serverItem) => {
     completed: serverItem.completed,
   };
 };
+
+export const fetchFromServer = async () => {
+  const response = await fetch(BASE_URL);
+  const serverItem = await response.json();
+  return serverItem.map(mapServerItemToLocalItem);
+};
+
+export const deleteFromServer = async (id) => {
+      const response = await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
+      return await response.json()
+
+}
+
+export const  toggleItemCompleted = async (id) => {
+
+}
